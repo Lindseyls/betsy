@@ -5,12 +5,6 @@ Rails.application.routes.draw do
   root 'mains#index'
   resources :mains, only: [:index]
 
-  resources :products do
-    # non-RESTful routes can be specified in a block or you manually:
-    # get '/products/:id', to: 'products#index', as: 'products'
-    resources :reviews
-  end
-
   resources :categories, only: [:new, :create] do
     resources  :products, only: [:index]
   end
@@ -22,5 +16,7 @@ Rails.application.routes.draw do
 
   resources :orders
 
-  get "/auth/:provider/callback", to: "sessions#create"
+
+  get "/auth/:provider/callback", to: "sessions#create" :as "auth_callback"
+
 end
