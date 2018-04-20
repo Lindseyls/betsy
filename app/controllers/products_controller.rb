@@ -1,10 +1,6 @@
 class ProductsController < ApplicationController
   # nic used
   # route controller view
-
-  def root
-  end
-
   def index
     @product = Product.all
   end
