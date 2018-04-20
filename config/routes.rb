@@ -8,3 +8,7 @@ Rails.application.routes.draw do
     # non-RESTful routes can be specified in a block or you manually:
     # get '/products/:id', to: 'products#index', as: 'products'
   end
+
+  get "/auth/:provider/callback", to: "sessions#create" :as "auth_callback"
+
+end
