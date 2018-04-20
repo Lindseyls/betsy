@@ -1,0 +1,17 @@
+<h3>pEtsy</h3>
+
+<nav>
+  <div class="site-nav">
+    <%= "Home Decor" %>
+    <%= "Accessories" %>
+    <%= "Food" %>
+  </div>
+</nav>
+
+<ul> Products Offered
+  <li>
+    <% @products.each do |product| %>
+    <p><%= product.by_description %></p>
+  </li>
+</ul>
+<% end %>

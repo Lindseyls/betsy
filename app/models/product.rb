@@ -1,12 +1,12 @@
 class Product < ApplicationRecord
-# validate product name and uniqueness
+  validates :name, presence: true
 
-# has_many...
+  has_many :orders
+  has_many :categories
 
-# belongs_to :category
-
-# will there be logic for anything here?
-
-# I could not think of any...
+  def self.by_description
+    # Shoule have product types (create new column or just use description--misleading!)
+    return Product.where(description: "accessory")
+  end
 
 end
