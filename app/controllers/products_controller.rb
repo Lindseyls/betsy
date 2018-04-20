@@ -4,11 +4,13 @@ class ProductsController < ApplicationController
 # are we making this the homepage?
 #
 # end
+
 # def index
-#
+# @products = Product.all
 # end
+
 # def new
-# @product = product.new
+# @product = Product.new
 #
 # end
 #
@@ -17,6 +19,7 @@ class ProductsController < ApplicationController
 # end
 #
 # def show
+# @product = Product.find_by(id? name?: params[:])
 #
 # end
 #
@@ -25,10 +28,19 @@ class ProductsController < ApplicationController
 # end
 #
 # def update
-#
+# @product.update_attributes(product_params)
+# @product.save
 # end
 #
 # def destroy
+# @product.destroy
+# redirect_to root_path
 #
+# end
+
+# private
+
+# def product_params
+# params.require(:product).permit(:name, :stock, :price, :description)
 # end
 end
