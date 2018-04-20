@@ -12,8 +12,15 @@
   </head>
 
   <body>
-    <header>
-      
+    <header class="page-header">
+      <nav>
+        <div class="site-nav">
+          <%= "Home Decor" %>
+          <%= "Accessories" %>
+          <%= "Food" %>
+          <%= link_to "Add New Product", new_product_path, class: "button" %>
+        </div>
+      </nav>
     </header>
 
     <%= yield %>

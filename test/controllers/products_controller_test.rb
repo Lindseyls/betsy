@@ -23,6 +23,12 @@ describe ProductsController do
   end
 
   describe "new" do
+    it "succeeds" do
+      # Arrange & Act
+      get new_product_path
+      # Assert
+      must_respond_with :success
+    end
   end
 
   describe "create" do
