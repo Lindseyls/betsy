@@ -1,8 +1,9 @@
 class Review < ApplicationRecord
-  # belongs_to or has_many :products
+  belongs_to :product, counter_cache: :vote_count
+  
 
-  # validates :review, presence: true
+  validates :product, presence: true
 
-  # validates :review, numericality: {only_integer: true, less_than_or_equal_to: 5}
+  validates :product, numericality: {only_integer: true, less_than_or_equal_to: 5}
 
 end
