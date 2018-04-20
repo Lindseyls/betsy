@@ -5,3 +5,13 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+
+require 'csv'
+product_file = Rails.root.join('db', 'product_seeds.csv')
+
+CSV.foreach(product_file, headers: true, header_converters: :symbol, converters: :all) do |row|
+  data = Hash[row.headers.zip(row.fields)]
+  puts data
+  Product.create!(data)
+end
