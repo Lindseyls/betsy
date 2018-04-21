@@ -26,3 +26,14 @@ CSV.foreach(user_file, headers: true, header_converters: :symbol, converters: :a
   User.create!(data)
   # we never do anything with the new data structure
 end
+
+category_file = Rails.root.join('db', 'categories.csv')
+
+# might have to change to .open, and
+CSV.foreach(category_file, headers: true, header_converters: :symbol, converters: :all) do |row|
+  # data is in a Hash, create a product ising the row data?
+  data = Hash[row.headers.zip(row.fields)]
+  puts data
+  Category.create!(data)
+  # we never do anything with the new data structure
+end
