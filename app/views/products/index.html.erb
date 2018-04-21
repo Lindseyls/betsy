@@ -1,12 +1,16 @@
 <h3>pEtsy</h3>
 
 <!-- Needs data -->
-<ul> Products Offered
-  <li>
+<div class="top-margin">
+  <h3>Products Offered</h3>
+  <section>
     <% @products.each do |product| %>
-    <p><%= product.by_description %></p>
+    <p><%= product.name %></p>
+    <p><%= product.price %></p>
+    <p><%= product.description %></p>
+    <p><%= product.stock %></p>
+  </section>
+
     <% end %>
   </li>
-</ul>
-
-<%= image_tag('Plush-Vader.jpg') %>
+</div>
