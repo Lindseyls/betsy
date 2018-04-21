@@ -9,16 +9,23 @@ product1:
   name: tank
   stock: 7
   price: 2100
-  description: decor
+  description: A bullet proof tank for the most wanted of reptiles
+  pet_type: reptile
+  photo_url: wwww.stuff.com
+
 
 product2:
   name: collar
   stock: 25
   price: 1000
-  description: accessory
+  description: A stylish collar for your most tamed canines
+  pet_type: dog
+  photo_url: wwww.stuff.com
 
 product3:
   name: Dog Scarf
   stock: 15
   price: 1000
-  description: accessory
+  description: A fabulous scarf for your fabulous pooch
+  pet_type: dog
+  photo_url: wwww.stuff.com

@@ -16,6 +16,8 @@ Rails.application.routes.draw do
 
   resources :orders
 
+  resources :products 
+
 
   get "/auth/:provider/callback", to: "sessions#create", as: "auth_callback"
 
