@@ -26,4 +26,21 @@ class ActiveSupport::TestCase
   # group :test do
   #   gem 'simplecov', require: false
   # end
+  def setup
+    # Once you have enabled test mode, all requests
+    # to OmniAuth will be short circuited to use the mock authentication hash.
+    # A request to /auth/provider will redirect immediately to /auth/provider/callback.
+    OmniAuth.config.test_mode = true
+  end
+
+  def mock_auth_hash(user)
+    return {
+      provider: user.provider,
+      uid: user.uid,
+      info: {
+        email: user.email,
+        username: user.username
+      }
+    }
+  end
 end
