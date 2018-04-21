@@ -4,6 +4,16 @@ describe User do
   let(:user) { User.new }
   let(:one) { users(:one) }
 
+  describe "relations" do
+    it "has a list of products" do
+
+    end
+
+    it "shows zero if user has no products" do
+      
+    end
+  end
+
   describe "validations" do
     it "must be valid" do
       one.must_be :valid?
