@@ -4,8 +4,10 @@ Rails.application.routes.draw do
 
   root 'mains#index'
   post '/logout', to: 'sessions#logout', as: 'logout'
-  
+
   resources :mains, only: [:index]
+
+  resources :products, except: [:index]
 
   resources :categories, only: [:new, :create] do
     resources  :products, only: [:index]

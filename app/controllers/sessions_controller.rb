@@ -1,5 +1,7 @@
 class SessionsController < ApplicationController
-  def login_form
+
+  def index
+    @user = User.find(session[:user_id])
   end
 
   def create
@@ -11,6 +13,7 @@ class SessionsController < ApplicationController
         @user = User.new(name: auth_hash['info']['name'], email: auth_hash['info']['email'], uid: auth_hash['uid'], provider:auth_hash['provider'])
 
         if @user.save
+          session[:user_id]= @user.id
           flash[:success] = "Logged in successfully"
           redirect_to root_path
         else
@@ -49,6 +52,13 @@ class SessionsController < ApplicationController
     session[:user_id] = nil
     flash[:status] = :success
     flash[:result_text] = "Successfully logged out"
+    redirect_to root_path
+  end
+
+  def destroy
+    session[:user_id] = nil
+    flash[:success] = "Successfully logged out!"
+
     redirect_to root_path
   end
 
