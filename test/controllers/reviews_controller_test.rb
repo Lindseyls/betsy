@@ -1,43 +1,42 @@
 require "test_helper"
 
 describe ReviewsController do
-  describe "index" do
-    it "succeeds when there are users" do
-      # Assumption instead of Arrange
-      # Check your assumption
-      User.count.must_be :>, 0
-
-      # Act
-      get users_path
-
-      # Assert
-      must_respond_with :success
-    end
-  end
+  # describe "index" do
+  #   it "succeeds when there are products" do
+  #
+  #     User.count.must_be :>, 0
+  #
+  #     # Act
+  #     get users_path
+  #
+  #     # Assert
+  #     must_respond_with :success
+  #   end
+  # end
 
   # describe "create" do
   #   it "creates a work with valid data for a real category" do
   #     # Arrange
-  #     work_data = {
-  #       title: 'controller test work',
-  #       category: 'movie',
-  #       creator: 'test creator'
+  #     product = Product.first
+  #     product_data = product.attributes
+  #
+  #     review_data = {
+  #       rating: 3,
+  #       comments: 'controller test comment',
+  #       product: product_data
   #     }
-  #     work = Work.new(work_data)
-  #     old_work_count = Work.count
+  #     review = Review.new(review_data)
+  #     old_review_count = Review.count
   #
   #     # Assumption
-  #     work.must_be :valid?
+  #     review.must_be :valid?
   #
   #     # Act
-  #     post works_path, params: { work: work_data }
+  #     post product_reviews_path, params: { product: product_data }
   #
   #     # Assert
-  #     must_respond_with :redirect
-  #     must_redirect_to work_path(Work.last)
-  #
-  #     Work.count.must_equal old_work_count + 1
-  #     Work.last.category.must_equal work_data[:category]
-  #     end
+  #     Review.count.must_equal old_work_count + 1
+  #     Review.last.product.must_equal review_data[:product]
+  #   end
   # end
 end

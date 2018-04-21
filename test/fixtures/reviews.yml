@@ -3,7 +3,9 @@
 one:
   rating: 4
   comments: Great product
+  product: product1
 
 two:
   rating: 3
   comments: Love this so much
+  product: product2
