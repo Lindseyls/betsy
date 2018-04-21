@@ -1,7 +1,6 @@
 require "test_helper"
 
 describe ProductsController do
-<<<<<<< HEAD
   describe "index" do
     it "succeeds when there are products" do
       # Arrange
@@ -35,9 +34,4 @@ describe ProductsController do
   describe "create" do
   end
 
-=======
-  # it "succeeds for valid products and existing product ID" do
-  #   flunk "Need real tests"
-  # end
->>>>>>> 5d9ec9db6222061f07e8c2237f898a8598fe3003
 end
