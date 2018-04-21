@@ -13,9 +13,9 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find_by(id: params[:id])
-    @products = @user.product
-
     head :not_found unless @user
+
+    @products = @merchant.product
   end
 
   def edit
