@@ -3,6 +3,8 @@ Rails.application.routes.draw do
 
 
   root 'mains#index'
+  post '/logout', to: 'sessions#logout', as: 'logout'
+  
   resources :mains, only: [:index]
 
   resources :categories, only: [:new, :create] do
@@ -17,6 +19,6 @@ Rails.application.routes.draw do
   resources :orders
 
 
-  get "/auth/:provider/callback", to: "sessions#create" :as "auth_callback"
+  get "/auth/:provider/callback", to: "sessions#create", as: "auth_callback"
 
 end
