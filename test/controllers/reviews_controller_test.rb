@@ -1,24 +1,16 @@
 require "test_helper"
 
 describe ReviewsController do
-  # describe "index" do
-  #   it "succeeds when there are users" do
-  #     # Assumption instead of Arrange
-  #     # Check your assumption
-  #     User.count.must_be :>, 0
-  #
-  #     # Act
-  #     get users_path
-  #
-  #     # Assert
-  #     must_respond_with :success
-  #   end
-  # end
+  describe "index" do
+    it "succeeds when there are users" do
+      # Assumption instead of Arrange
+      # Check your assumption
+      User.count.must_be :>, 0
 
-  describe "new" do
-    it " responds with success" do
-      get new_product_review_path
+      # Act
+      get users_path
 
+      # Assert
       must_respond_with :success
     end
   end
