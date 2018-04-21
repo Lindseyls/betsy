@@ -15,3 +15,9 @@ two:
   email: lizard@petsy.com
   uid: 2
   provider: github
+
+three:
+    username: cat
+    email: neko@petsy.com
+    uid: 3
+    provider: github
