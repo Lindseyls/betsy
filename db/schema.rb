@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180421184734) do
+ActiveRecord::Schema.define(version: 20180421200355) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -42,6 +42,8 @@ ActiveRecord::Schema.define(version: 20180421184734) do
     t.string "description"
     t.string "pet_type"
     t.string "photo_url"
+    t.bigint "users_id"
+    t.index ["users_id"], name: "index_products_on_users_id"
   end
 
   create_table "products_categories", force: :cascade do |t|
@@ -72,4 +74,5 @@ ActiveRecord::Schema.define(version: 20180421184734) do
     t.string "provider", null: false
   end
 
+  add_foreign_key "products", "users", column: "users_id"
 end
