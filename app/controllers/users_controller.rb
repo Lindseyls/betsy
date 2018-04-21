@@ -5,6 +5,7 @@ class UsersController < ApplicationController
   end
 
   def new
+    @users = User.new
   end
 
   def create
@@ -12,6 +13,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find_by(id: params[:id])
+    @products = @user.product
 
     head :not_found unless @user
   end
