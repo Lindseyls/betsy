@@ -2,7 +2,7 @@ class ProductsController < ApplicationController
   # nic used
   # route controller view
   def index
-    @product = Product.all
+    @products = Product.all
   end
 
   def new
@@ -38,3 +38,4 @@ class ProductsController < ApplicationController
   def product_params
     params.require(:product).permit(:name, :stock, :price, :description)
   end
+end
