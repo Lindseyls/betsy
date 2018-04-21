@@ -1,7 +1,6 @@
 require "test_helper"
 
 describe ProductsController do
-
   describe "index" do
     it "succeeds when there are products" do
       # Arrange

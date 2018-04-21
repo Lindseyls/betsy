@@ -6,9 +6,4 @@ class Product < ApplicationRecord
   has_many :reviews
   has_and_belongs_to_many :categories
 
-  def self.by_description
-    # Shoule have product types (create new column or just use description--misleading!)
-    return Product.where(description: "accessory")
-  end
-
 end

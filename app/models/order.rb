@@ -22,6 +22,4 @@ class Order < ApplicationRecord
 
 # link to the user
 # link to the item description page
-
-
-    # end 
+end
