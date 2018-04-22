@@ -3,7 +3,7 @@ Rails.application.routes.draw do
 
 
   root 'mains#index'
-  
+
   post '/logout', to: 'sessions#logout', as: 'logout'
 
   resources :mains, only: [:index]
