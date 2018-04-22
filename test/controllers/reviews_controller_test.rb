@@ -1,21 +1,22 @@
 require "test_helper"
 
 describe ReviewsController do
-  # describe "index" do
-  #   it "succeeds when there are products" do
-  #
-  #     User.count.must_be :>, 0
-  #
-  #     # Act
-  #     get users_path
-  #
-  #     # Assert
-  #     must_respond_with :success
-  #   end
-  # end
+  describe "index" do
+    it "sends a success response when there are many reviews'" do
+
+      Review.count.must_be :>, 0
+      product = Product.first
+
+      # Act
+      get product_reviews_path(product.id)
+
+      # Assert
+      must_respond_with :success
+    end
+  end
 
   # describe "create" do
-  #   it "creates a work with valid data for a real category" do
+  #   it "creates a review with valid data for a real category" do
   #     # Arrange
   #     product = Product.first
   #     product_data = product.attributes
@@ -30,13 +31,13 @@ describe ReviewsController do
   #
   #     # Assumption
   #     review.must_be :valid?
-  #
-  #     # Act
-  #     post product_reviews_path, params: { product: product_data }
-  #
-  #     # Assert
-  #     Review.count.must_equal old_work_count + 1
-  #     Review.last.product.must_equal review_data[:product]
+      #
+      # Act
+      # post product_reviews_path, params: { product: product_data }
+      #
+      # # Assert
+      # Review.count.must_equal old_work_count + 1
+      # Review.last.product.must_equal review_data[:product]
   #   end
   # end
 end
