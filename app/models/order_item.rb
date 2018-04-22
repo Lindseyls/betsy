@@ -7,6 +7,7 @@ class OrderItem < ApplicationRecord
   def available?
     product = self.product
 
+    # should this be compared with product.stock?
     if self.quantity > product.quantity
       return false
     else
