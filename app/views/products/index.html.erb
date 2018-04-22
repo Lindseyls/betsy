@@ -3,14 +3,17 @@
 <!-- Needs data -->
 <div class="top-margin">
   <h3>Products Offered</h3>
-  <section>
+  <div class="caption">
     <% @products.each do |product| %>
     <p><%= product.name %></p>
     <p><%= product.price %></p>
     <p><%= product.description %></p>
     <p><%= product.stock %></p>
-  </section>
 
-    <% end %>
-  </li>
+  </div>
+  <div class="ratings">
+    <p>Rating:<%= product.show_rating %></p>
+  </div>
+  <% end %>
+</li>
 </div>
