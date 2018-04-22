@@ -2,7 +2,8 @@ class MainsController < ApplicationController
 
   def index
     @categories = Category.all
-    @products = Product.
-
+    @cat_products = Product.cat
+    @dog_products = Product.dog
+    @reptile_products = Product.reptile
   end
 end

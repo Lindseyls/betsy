@@ -7,6 +7,21 @@ class Product < ApplicationRecord
   belongs_to :users, optional: true
   has_and_belongs_to_many :categories
 
-  # CATEGORIES = "home & bedding","health & grooming", "toys", "training & accessories", "food"
+  # CATEGORIES = %w(Home Bedding Health Grooming Toys Training Accessories Food)
 
+  def self.pet_type(type)
+    where(pet_type: type).limit(4)
+  end
+
+  def self.cat
+    pet_type("cat")
+  end
+
+  def self.dog
+    pet_type("dog")
+  end
+
+  def self.reptile
+    pet_type("reptile")
+  end
 end
