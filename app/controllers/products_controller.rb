@@ -13,10 +13,9 @@ class ProductsController < ApplicationController
     @product = Product.create(product_params)
   end
 
-  # def show
-  #   @product = Product.find_by(id? name?: params[:])
-  #
-  # end
+  def show
+    @product = Product.find_by(id: params[:id])
+  end
   #
   # def edit
   #

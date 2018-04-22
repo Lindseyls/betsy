@@ -1,0 +1,41 @@
+<section>
+  <h3>Cats</h3>
+  <ul>
+    <% @cat_products.each do |product| %>
+      <li>
+        <h4>
+          <%= link_to product.name, product_path(product) %>
+          <small>price <%= product.price %></small>
+        </h4>
+      </li>
+    <% end %>
+  </ul>
+</section>
+
+<section>
+  <h3>Dogs</h3>
+  <ul>
+    <% @dog_products.each do |product| %>
+      <li>
+        <h4>
+          <%= link_to product.name, product_path(product) %>
+          <small>price <%= product.price %></small>
+        </h4>
+      </li>
+    <% end %>
+  </ul>
+</section>
+
+<section>
+  <h3>Reptiles</h3>
+  <ul>
+    <% @reptile_products.each do |product| %>
+      <li>
+        <h4>
+          <%= link_to product.name, product_path(product) %>
+          <small>price <%= product.price %></small>
+        </h4>
+      </li>
+    <% end %>
+  </ul>
+</section>
