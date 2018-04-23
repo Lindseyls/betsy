@@ -5,10 +5,11 @@
   <h3>Products Offered</h3>
   <div class="caption">
     <% @products.each do |product| %>
+    <%=image_tag(product.photo_url)%>
     <p><%= product.name %></p>
-    <p><%= product.price %></p>
+    <p>$<%= product.price %></p>
     <p><%= product.description %></p>
-    <p><%= product.stock %></p>
+    <p><%= product.stock %> Available</p>
 
   </div>
   <div class="ratings">
