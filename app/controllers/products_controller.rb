@@ -1,5 +1,5 @@
 class ProductsController < ApplicationController
-    before_action :find_product, only: [:show, :edit, :update, :destroy]
+  before_action :find_product, only: [:show, :edit, :update, :destroy]
 
   def index
     if params[:user_id]
@@ -12,11 +12,20 @@ class ProductsController < ApplicationController
   end
 
   def new
-    @product = Product.new
+    @product = Product.new(user_id: params[:user_id])
   end
 
   def create
-    @product = Product.create(product_params)
+    @product = Product.new(product_params)
+
+    if @product.save
+      flash[:success] = "Product added successfully"
+      redirect_to products_path
+    else
+      flash.now[:failure] = "Validations Failed"
+      render :new, status: :bad_request
+    end
+
   end
 
   def show
@@ -41,7 +50,7 @@ class ProductsController < ApplicationController
   private
 
   def product_params
-    params.require(:product).permit(:name, :stock, :price, :description, :pet_type, :photo_url, categories_ids: [])
+    params.require(:product).permit(:name, :stock, :price, :description, :pet_type, :photo_url, :user_id, categories_ids: [])
   end
 
   def find_product
