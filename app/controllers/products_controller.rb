@@ -2,7 +2,13 @@ class ProductsController < ApplicationController
   # nic used
   # route controller view
   def index
-    @products = Product.all
+    if params[:user_id]
+      @user = User.find(params[:users_id])
+      @products = @user.products
+      # finds the products for specific user
+    else
+      @products = Product.all
+    end
   end
 
   def new
