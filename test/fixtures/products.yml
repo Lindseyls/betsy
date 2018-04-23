@@ -11,6 +11,7 @@ product1:
   description: A bullet proof tank for the most wanted of reptiles
   pet_type: reptile
   photo_url: wwww.stuff.com
+  user: one
 
 
 product2:
@@ -20,6 +21,8 @@ product2:
   description: A stylish collar for your most tamed canines
   pet_type: dog
   photo_url: wwww.stuff.com
+  user: one
+
 
 product3:
   name: Dog Scarf
@@ -28,3 +31,4 @@ product3:
   description: A fabulous scarf for your fabulous pooch
   pet_type: dog
   photo_url: wwww.stuff.com
+  user: two
