@@ -42,10 +42,4 @@ class Product < ApplicationRecord
     pet_type("reptile")
   end
 
-  private
-
-  def product_params
-    return params.require(:product).permit(:user, :name)
-  end
-
 end
