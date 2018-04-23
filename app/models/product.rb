@@ -23,6 +23,11 @@ class Product < ApplicationRecord
     return average
   end
 
+  def self.convert_price
+    dollars = (@product.price)/ 100
+    return "#{dollars}"
+  end
+
   def self.pet_type(type)
     where(pet_type: type).limit(4)
   end
