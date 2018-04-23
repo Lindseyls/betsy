@@ -3,12 +3,10 @@ class Category < ApplicationRecord
 
   validates :name, presence: true
 
-  def show_product
-    @products = Product.all
+  def show_products
 
     products = self.products
 
-    product_list = []
     products.each do |item|
       product_list << item.name
     end
