@@ -8,8 +8,8 @@ Rails.application.routes.draw do
 
   resources :mains, only: [:index]
 
-  resources :categories, only: [:new, :create] do
-    resources  :products, only: [:index]
+  resources :categories, only: [:index, :new, :create] do
+    resources :products, only: [:index]
   end
 
   resources :users do
@@ -19,7 +19,7 @@ Rails.application.routes.draw do
   resources :orders
 
   resources :products do
-    resources :reviews, only: [:index, :create]
+    resources :reviews, only: [:index, :new, :create]
   end
 
   get "/auth/:provider/callback", to: "sessions#create", as: "auth_callback"
