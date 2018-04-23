@@ -1,7 +1,7 @@
 <h3>pEtsy</h3>
 
 <!-- Needs data -->
-<div class="top-margin">
+<section class="top-margin">
   <h3>Products Offered</h3>
   <div class="caption">
     <% @products.each do |product| %>
@@ -16,5 +16,8 @@
     <p>Rating:<%= product.show_rating %></p>
   </div>
   <% end %>
-</li>
-</div>
+
+  <div>
+    <%= render partial: "reviews/form", locals: { action_name: "Save My Review" } %>
+  </div>
+</section>
