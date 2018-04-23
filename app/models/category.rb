@@ -3,28 +3,16 @@ class Category < ApplicationRecord
 
   validates :name, presence: true
 
-  CATEGORIES = %w(Home Bedding Health Grooming Toys Training Accessories Food)
+  def show_product
+    @products = Product.all
 
-# TODO: this will probably need a form
-  def self.new_category
-    new_cat = self.new(name: params[:name])
+    products = self.products
 
-    CATEGORIES << new_cat
-
-    return CATEGORIES
-  end
-
-  def self.to_category_hash
-    data = {}
-    CATEGORIES.each do |cat|
-      data[cat] = by_category(cat)
+    product_list = []
+    products.each do |item|
+      product_list << item.name
     end
-    return data
-  end
-
-  def self.by_category(category)
-    category = category.singularize.capitalize
-    self.where(category: category)
+    return product_list
   end
 
 end

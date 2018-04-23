@@ -2,7 +2,6 @@ class Product < ApplicationRecord
   validates :name, presence: true
 
   has_many :order_items
-  has_many :categories
   has_many :reviews, dependent: :destroy
   belongs_to :users, optional: true
   has_and_belongs_to_many :categories
@@ -22,6 +21,7 @@ class Product < ApplicationRecord
     average = total/reviews.count
     return average
   end
+
 
   def self.pet_type(type)
     where(pet_type: type).limit(4)
