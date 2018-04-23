@@ -1,6 +1,6 @@
 class ProductsController < ApplicationController
-  # nic used
-  # route controller view
+    before_action :find_product, only: [:show, :edit, :update, :destroy]
+
   def index
     if params[:user_id]
       @user = User.find(params[:users_id])
@@ -42,5 +42,11 @@ class ProductsController < ApplicationController
 
   def product_params
     params.require(:product).permit(:name, :stock, :price, :description, :pet_type, :photo_url)
+  end
+
+  def find_product
+    @product = Product.find_by(id: params[:id])
+    # head is like render, but doesn't run a view template, only status code
+    head :not_found unless @product
   end
 end
