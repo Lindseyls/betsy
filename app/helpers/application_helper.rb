@@ -8,6 +8,9 @@ module ApplicationHelper
     if price.nil?
       price = 0
     end
-    "$" + format("%.2f", price)
+
+    "$" + format("%.2f", price/10)
   end
+
+
 end
