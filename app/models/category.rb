@@ -8,7 +8,7 @@ class Category < ApplicationRecord
     products = self.products
 
     products.each do |item|
-      product_list << item.name
+    item.name
     end
     return product_list
   end
