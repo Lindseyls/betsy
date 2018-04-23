@@ -3,7 +3,7 @@ class ProductsController < ApplicationController
 
   def index
     if params[:user_id]
-      @user = User.find(params[:users_id])
+      @user = User.find(params[:user_id])
       @products = @user.products
       # finds the products for specific user
     else
