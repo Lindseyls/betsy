@@ -1,9 +1,18 @@
 require "test_helper"
 
 describe Category do
-  let(:category) { Category.new }
+  describe "relations" do
+    it "connects product and product_id" do
+      product = Product.first
+      category = Category.first
 
-  it "must be valid" do
-    value(category).must_be :valid?
+      product.categories << category
+
+      product.category_ids.must_include category.id
+    end
+  end
+
+  describe "validations" do
+
   end
 end
