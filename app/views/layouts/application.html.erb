@@ -18,8 +18,8 @@
         <%= link_to "Home", root_path, class: "button" %>
         <%= "Browse dropdown menu bar" %>
           <%= link_to "All Product", products_path, class: "button" %>
-          <%= link_to "All Category", category_products_path, class: "button" %>
-          <%= link_to "All Merchants", user_products_path, class: "button" %>
+          <%= link_to "All Category", categories_path, class: "button" %>
+          <%= link_to "All Merchants", users_path, class: "button" %>
         <%= link_to "Add New Product", new_product_path, class: "button" %>
         <% if session[:user_id] %>
         <%= link_to "Log out", logout_path, method: "delete"   %>

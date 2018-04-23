@@ -7,9 +7,6 @@ class Product < ApplicationRecord
   belongs_to :users, optional: true
   has_and_belongs_to_many :categories
 
-
-  # CATEGORIES = %w(Home Bedding Health Grooming Toys Training Accessories Food)
-
   def show_rating
     @reviews = Review.all
 
