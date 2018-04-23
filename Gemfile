@@ -73,8 +73,5 @@ group :test do
   gem 'minitest-rails'
   gem 'minitest-reporters'
   gem 'simplecov', require: false
-<<<<<<< HEAD
 
-=======
->>>>>>> 52666130be68e2efa27dec08b226f574ce3854dc
 end
