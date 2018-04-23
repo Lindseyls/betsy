@@ -5,7 +5,7 @@ class Category < ApplicationRecord
 
   CATEGORIES = %w(Home Bedding Health Grooming Toys Training Accessories Food)
 
-
+# TODO: this will probably need a form
   def self.new_category
     new_cat = self.new(name: params[:name])
 
