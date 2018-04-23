@@ -1,6 +1,6 @@
 class CategoriesController < ApplicationController
   def index
-  @products_by_categories = Category.to_category_hash
+    @categories = Category.all
 end
 
 def new
