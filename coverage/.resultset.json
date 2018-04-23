@@ -485,6 +485,56 @@
   },
   "MiniTest": {
     "coverage": {
+      "/Users/brendarios/ada/Week#11/betsy/app/helpers/application_helper.rb": [
+        1,
+        null,
+        1,
+        0,
+        null,
+        null,
+        1,
+        0,
+        0,
+        null,
+        null,
+        0,
+        null,
+        null,
+        null,
+        null
+      ],
+      "/Users/brendarios/ada/Week#11/betsy/app/helpers/categories_helper.rb": [
+        1,
+        null
+      ],
+      "/Users/brendarios/ada/Week#11/betsy/app/helpers/mains_helper.rb": [
+        1,
+        null
+      ],
+      "/Users/brendarios/ada/Week#11/betsy/app/helpers/order_items_helper.rb": [
+        1,
+        null
+      ],
+      "/Users/brendarios/ada/Week#11/betsy/app/helpers/orders_helper.rb": [
+        1,
+        null
+      ],
+      "/Users/brendarios/ada/Week#11/betsy/app/helpers/products_helper.rb": [
+        1,
+        null
+      ],
+      "/Users/brendarios/ada/Week#11/betsy/app/helpers/reviews_helper.rb": [
+        1,
+        null
+      ],
+      "/Users/brendarios/ada/Week#11/betsy/app/helpers/sessions_helper.rb": [
+        1,
+        null
+      ],
+      "/Users/brendarios/ada/Week#11/betsy/app/helpers/users_helper.rb": [
+        1,
+        null
+      ],
       "/Users/brendarios/ada/Week#11/betsy/app/controllers/categories_controller.rb": [
         1,
         1,
@@ -562,17 +612,17 @@
         1,
         null,
         1,
-        0,
+        1,
         0,
         0,
         null,
         null,
-        0,
+        1,
         null,
         null,
         null,
         1,
-        0,
+        1,
         null,
         null,
         1,
@@ -624,7 +674,7 @@
         1,
         null,
         1,
-        0,
+        1,
         null,
         null,
         1,
@@ -657,11 +707,11 @@
         null,
         null,
         1,
-        0,
+        1,
         null,
-        0,
-        0,
-        0,
+        1,
+        1,
+        1,
         0,
         null,
         0,
@@ -904,56 +954,6 @@
         0,
         0
       ],
-      "/Users/brendarios/ada/Week#11/betsy/app/helpers/application_helper.rb": [
-        0,
-        null,
-        0,
-        0,
-        0,
-        null,
-        0,
-        0,
-        0,
-        0,
-        null,
-        0,
-        0,
-        null,
-        null,
-        0
-      ],
-      "/Users/brendarios/ada/Week#11/betsy/app/helpers/categories_helper.rb": [
-        0,
-        0
-      ],
-      "/Users/brendarios/ada/Week#11/betsy/app/helpers/mains_helper.rb": [
-        0,
-        0
-      ],
-      "/Users/brendarios/ada/Week#11/betsy/app/helpers/order_items_helper.rb": [
-        0,
-        0
-      ],
-      "/Users/brendarios/ada/Week#11/betsy/app/helpers/orders_helper.rb": [
-        0,
-        0
-      ],
-      "/Users/brendarios/ada/Week#11/betsy/app/helpers/products_helper.rb": [
-        0,
-        0
-      ],
-      "/Users/brendarios/ada/Week#11/betsy/app/helpers/reviews_helper.rb": [
-        0,
-        0
-      ],
-      "/Users/brendarios/ada/Week#11/betsy/app/helpers/sessions_helper.rb": [
-        0,
-        0
-      ],
-      "/Users/brendarios/ada/Week#11/betsy/app/helpers/users_helper.rb": [
-        0,
-        0
-      ],
       "/Users/brendarios/ada/Week#11/betsy/app/jobs/application_job.rb": [
         0,
         0
@@ -965,6 +965,6 @@
         0
       ]
     },
-    "timestamp": 1524520915
+    "timestamp": 1524521957
   }
 }
