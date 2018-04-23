@@ -5,7 +5,8 @@
   <h3>Products Offered</h3>
   <div class="caption">
     <% @products.each do |product| %>
-    <%=image_tag(product.photo_url)%>
+    <%=image_tag(product.photo_url) unless product.photo_url.blank? %>
+
     <p><strong><%= link_to(product.name, product_path(product)) %></strong></p>
 
     <p>$<%= product.price %></p>

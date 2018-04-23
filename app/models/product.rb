@@ -22,8 +22,8 @@ class Product < ApplicationRecord
     return average
   end
 
-  def self.convert_price
-    dollars = (@product.price)/ 100
+  def convert_price
+    dollars = (self.price)/ 100
     return "#{dollars}"
   end
   
