@@ -10,6 +10,11 @@ describe Review do
   end
 
   describe "validations" do
+    it "must be valid with all required fields" do
+      review = Review.last
+      review.valid?.must_equal true
+    end
+
     it "allows users to review for multiple products" do
       review1 = reviews(:one)
       review2 = reviews(:two)
@@ -22,21 +27,6 @@ describe Review do
       review.save
       review.valid?.must_equal false
       review.errors.messages.must_include :rating
-    end
-
-    it "creates a review with all required fields" do
-      # # Arrange
-      # @review = Review.new(rating: 3)
-      #
-      # # Act
-      # result = @review.valid?
-      #
-      # # Assert
-      # result.must_equal true
-
-      review = Review.last
-      review.valid?.must_equal true
-      # review.rating.valid?.must_equal true
     end
 
     it "requires a rating to be integer" do
