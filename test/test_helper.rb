@@ -1,3 +1,12 @@
+require 'simplecov'
+SimpleCov.start 'rails' do
+  add_filter '/bin/'
+  add_filter '/db/'
+  add_filter '/spec/' # for rspec
+  add_filter '/test/' # for minitest
+end
+
+
 ENV["RAILS_ENV"] = "test"
 SimpleCov.start 'rails' do
   add_filter '/bin/'
@@ -10,7 +19,16 @@ require "rails/test_help"
 require "minitest/rails"
 require "minitest/reporters"  # for Colorized output
 require 'simplecov'
+<<<<<<< HEAD
 
+=======
+SimpleCov.start 'rails' do
+  add_filter '/bin/'
+  add_filter '/db/'
+  add_filter '/spec/' # for rspec
+  add_filter '/test/' # for minitest
+end
+>>>>>>> 52666130be68e2efa27dec08b226f574ce3854dc
 
 #  For colorful output!
 Minitest::Reporters.use!(
