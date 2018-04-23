@@ -14,7 +14,7 @@ describe User do
       dan.products.count.must_equal 2
     end
 
-    it "shows zero if user has no products" do
+    it "works if user has no products" do
       dan = users(:three)
       dan.must_respond_to :products
       dan.products.each do |product|
