@@ -2,6 +2,7 @@
   <h1>All Merchants!!</h1>
   <p>
     <% @users.each do |user| %>
+    
     <%= @products %>
     <%= link_to(user.username, user_products_path(user.id), alt: 'link to') %> |
     <% end %>
