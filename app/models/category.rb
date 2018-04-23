@@ -7,7 +7,7 @@ class Category < ApplicationRecord
 
     products = self.products
 
-    products.each do |item|
+    product_list = products.each do |item|
     item.name
     end
     return product_list
