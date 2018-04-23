@@ -16,3 +16,7 @@ possibly add [:new] to user_products_path -->
   <p><%= @product.stock %> Available</p>
   <p>Add to Cart</p>
 </div>
+
+<div>
+  <%= render partial: "reviews/form", locals: { action_name: "Save My Review" } %>
+</div>
