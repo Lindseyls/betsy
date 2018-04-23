@@ -2,7 +2,8 @@
   <!-- TODO: Add link to the merchant user,
 possibly add [:new] to user_products_path -->
 
-  <h2>Merchant: User1 </h2>
+  <h2>Merchant: <%= link_to(@product.user_id, user_path) %></h2>
+
 </div>
 
 <div class="">
@@ -11,7 +12,7 @@ possibly add [:new] to user_products_path -->
 
 <div class="">
   <h2><%= @product.name %></h2>
-  <h4><%= @product.price %></h4>
+  <h4><%= @product.convert_price %></h4>
   <p><%= @product.description %></p>
   <p><%= @product.stock %> Available</p>
   <p>Add to Cart</p>
