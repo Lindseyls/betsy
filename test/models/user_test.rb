@@ -6,11 +6,21 @@ describe User do
 
   describe "relations" do
     it "has a list of products" do
-
+      dan = users(:one)
+      dan.must_respond_to :products
+      dan.products.each do |product|
+        product.must_be_kind_of Product
+      end
+      dan.products.count.must_equal 2
     end
 
-    it "shows zero if user has no products" do
-      
+    it "works if user has no products" do
+      dan = users(:three)
+      dan.must_respond_to :products
+      dan.products.each do |product|
+        product.must_be_kind_of Product
+      end
+      dan.products.count.must_equal 0
     end
   end
 
