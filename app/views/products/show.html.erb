@@ -12,12 +12,12 @@ possibly add [:new] to user_products_path -->
 
 <div class="">
   <h2><%= @product.name %></h2>
-  <h4><%= @product.convert_price %></h4>
+
   <p><%= @product.description %></p>
   <p><%= @product.stock %> Available</p>
   <p>Add to Cart</p>
-</div>
 
-<div>
-  <%= render partial: "reviews/form", locals: { action_name: "Save My Review" } %>
+  <p>
+   <%= link_to "Leave a Review", new_product_review_path(@product) %>
+  </p>
 </div>

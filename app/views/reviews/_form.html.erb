@@ -1,7 +1,7 @@
 <<<<<<< HEAD
 <section>
 
-  <%= form_for @product.review do |f| %>
+  <%= form_for [@product,@review] do |f| %>
 
     <%= f.label :rating, "Rating (1-5)" %>
     <%= f.number_field :rating %>
