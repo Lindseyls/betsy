@@ -4,7 +4,7 @@ order_1:
   status: pending
   email: email1
   mail_adr: mail_adr1
-  name: name1
+  cc_name: cc_name1
   cc_num: 123456789123456
   cc_exp: 11/22
   cc_cvv: 123
@@ -15,7 +15,7 @@ order_2:
   status: complete
   email: email2
   mail_adr: mail_adr2
-  name: name2
+  cc_name: cc_name2
   cc_num: 123456789123456
   cc_exp: 11/22
   cc_cvv: 123
@@ -25,7 +25,7 @@ order_3:
   status: pending
   email: email3
   mail_adr: mail_adr3
-  name: name3
+  cc_name: cc_name3
   cc_num: 123456789123456
   cc_exp: 11/22
   cc_cvv: 123
@@ -36,7 +36,7 @@ order_4:
   status: pending
   email: email4
   mail_adr: mail_adr4
-  name: name4
+  cc_name: cc_name4
   cc_num: 123456789123456
   cc_exp: 11/22
   cc_cvv: 123
@@ -46,7 +46,7 @@ order_5:
   status: pending
   email: email5
   mail_adr: mail_adr5
-  name: name5
+  cc_name: cc_name5
   cc_num: 123456789123456
   cc_exp: 11/22
   cc_cvv: 123
