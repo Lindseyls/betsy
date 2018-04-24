@@ -22,12 +22,12 @@ describe Order do
       end
 
       describe "validations" do
-        it "must have an address" do
+        it "must have a mailing address" do
           @order.mail_adr = nil
           @order.valid?.must_equal false
         end
 
-        it "must have a name corresponding with the credit card" do
+        it "must have a name in the credit card information" do
           @order.cc_name = nil
           @order.valid?.must_equal false
           @order.cc_name = "Rufino Woof"
@@ -41,7 +41,7 @@ describe Order do
           @order.valid?.must_equal false
         end
 
-        it "must have a billing zip code that is numerical" do
+        it "must have a billing zip code number" do
           @order.bill_zip.must_equal "98075"
           @order.valid?.must_equal true
 
@@ -52,7 +52,7 @@ describe Order do
         end
 
 
-        it "must have a credit card number which is 16 digits in length" do
+        it "must have a credit card number of 16 digits" do
           @order.cc_num.must_equal "9875632147652345"
           @order.valid?.must_equal true
 
@@ -62,7 +62,7 @@ describe Order do
           end
         end
 
-        it "must have a three-digit CVV number" do
+        it "must include a CVV number of 3 digits" do
           [nil,"18294673","fuw"].each do |num|
             @order.cc_cvv = num
             @order.valid?.must_equal false
@@ -74,7 +74,7 @@ describe Order do
           end
         end
 
-        it "must have a credit card expiration date that is not in the past" do
+        it "must have a credit card expiration date that is not past from current date" do
           ["09/16", nil, ""].each do |num|
             @order.cc_exp = num
             @order.valid?.must_equal false
