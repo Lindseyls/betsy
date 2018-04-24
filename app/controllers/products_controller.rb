@@ -1,6 +1,7 @@
 class ProductsController < ApplicationController
   before_action :find_product, only: [:show, :edit, :update, :destroy]
 
+
   def index
     if params[:user_id]
       @user = User.find(params[:user_id])
@@ -30,13 +31,12 @@ class ProductsController < ApplicationController
 
   def show
     @product = Product.find_by(id: params[:id])
-    @review = Review.new(product: @product)
   end
-  #
+
   # def edit
   #
   # end
-  #
+
   # def update
   #   @product.update_attributes(product_params)
   #   @product.save
@@ -47,7 +47,7 @@ class ProductsController < ApplicationController
   #   redirect_to root_path
   #
   # end
-  #
+
   private
 
   def product_params
@@ -56,7 +56,6 @@ class ProductsController < ApplicationController
 
   def find_product
     @product = Product.find_by(id: params[:id])
-    # head is like render, but doesn't run a view template, only status code
     head :not_found unless @product
   end
 end
