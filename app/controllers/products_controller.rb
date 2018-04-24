@@ -12,14 +12,11 @@ class ProductsController < ApplicationController
   end
 
   def new
-    @review = Review.find_by(id: params[:review_id])
     @product = Product.new(user_id: params[:user_id])
   end
 
   def create
-    @review = Review.find_by(id: params[:review_id])
     @product = Product.new(product_params)
-    @product.review = @review
 
     if @product.save
       flash[:success] = "Product added successfully"
