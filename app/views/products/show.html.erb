@@ -2,7 +2,7 @@
   <!-- TODO: Add link to the merchant user,
 possibly add [:new] to user_products_path -->
 
-  <h2>Merchant: <%= link_to(@product.user_id, user_path) %></h2>
+<h2>Merchant: <%= link_to @product.user_id, user_path %></h2>
 
 </div>
 
@@ -12,12 +12,34 @@ possibly add [:new] to user_products_path -->
 
 <div class="">
   <h2><%= @product.name %></h2>
-
+  <h4><%= format_price(@product.price) %></h4>
   <p><%= @product.description %></p>
   <p><%= @product.stock %> Available</p>
+
+  <p>
+    <% if @product.reviews.count == 0 %>
+      <%= @product.show_rating %>
+    <% else %>
+      <ul>
+        <% @product.reviews.each do |review| %>
+          <li>
+            <%= review.rating %>
+            <%= review.comments %>
+            <%= render_date(review.created_at) %>
+          </li>
+        <% end %>
+      </ul>
+    <% end %>
+  </p>
+
   <p>Add to Cart</p>
 
   <p>
    <%= link_to "Leave a Review", new_product_review_path(@product) %>
   </p>
+
+  <div>
+    <%= render partial: "reviews/form", locals: { action_name: "Save My Review" } %>
+  </div>
+
 </div>
