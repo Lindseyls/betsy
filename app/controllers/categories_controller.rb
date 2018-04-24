@@ -1,21 +1,21 @@
 class CategoriesController < ApplicationController
   def index
     @categories = Category.all
-end
+  end
 
-def new
-  @category = Category.new
-end
+  def new
+    @category = Category.new
+  end
 
-def create
-  @category = Category.new(category_params)
-  @category.save
-end
+  def create
+    @category = Category.new(category_params)
+    @category.save
+  end
 
-private
-def category_params
-  params.require(:category).permit(:name, product_ids:[])
-end
+  private
+  def category_params
+    params.require(:category).permit(:name, product_ids:[])
+  end
 
 
 end
