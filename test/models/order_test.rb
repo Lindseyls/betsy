@@ -2,11 +2,10 @@ require "test_helper"
 
 describe Order do
   let(:order) { Order.new }
-  let(:order1) { orders(:order_2) }#status complete
-  let(:order2) { orders(:order_1) }#staus pending
+  let(:order1) { orders(:order_1) }
 
   describe "relations" do
-    it "has a list of orderitems" do
+    it "has a list of order_items" do
       order1.order_items.each do |item|
         item.must_be_instance_of OrderItem
         item.order.must_be_instance_of Order
@@ -16,107 +15,77 @@ describe Order do
   end
 
   describe "validations" do
-    it "validates the presence of a status" do
-      order1.status = nil
-      order1.valid?.must_equal false
-      order1.errors.messages.must_include :status
+    before do
+      @order = Order.new(email: "rufo@petsy.com", mail_adr: "2615 233rd SE, Sammamish, WA",
+        cc_name: "Rufino Woof", cc_num: "9875632147652345", cc_exp: "09/22", cc_cvv: "987",
+        bill_zip: "98075", status: "paid")
+      end
 
-      order1.status = ""
-      order1.valid?.must_equal false
-      order1.errors.messages.must_include :status
-    end
+      describe "validations" do
+        it "must have an address" do
+          @order.mail_adr = nil
+          @order.valid?.must_equal false
+        end
 
-    it "has an email adress" do
-      order1.email = nil
-      order1.valid?.must_equal false
-      order1.errors.messages.must_include :email
+        it "must have a name corresponding with the credit card" do
+          @order.cc_name = nil
+          @order.valid?.must_equal false
+          @order.cc_name = "Rufino Woof"
+          @order.valid?.must_equal true
+        end
 
-      order1.email = ""
-      order1.valid?.must_equal false
-      order1.errors.messages.must_include :email
+        it "must have an email address" do
+          @order.email.must_equal "rufo@petsy.com"
+          @order.valid?.must_equal true
+          @order.email = nil
+          @order.valid?.must_equal false
+        end
 
-      order1.valid?.must_equal true
-    end
+        it "must have a billing zip code that is numerical" do
+          @order.bill_zip.must_equal "98075"
+          @order.valid?.must_equal true
 
-    it "has an mailing address" do
-      order1.mail_address = nil
-      order.valid?.must_equal false
-      order1.errors.messages.must_include :mail_adress
+          [nil,"","wooof"].each do |num|
+            @order.bill_zip = num
+            @order.valid?.must_equal false
+          end
+        end
 
-      order1.mail_adress = ""
-      order1.valid?.must_equal false
-      order1.errors.messages.must_include :mail_adress
 
-      order1.valid?.must_equal true
-    end
+        it "must have a credit card number which is 16 digits in length" do
+          @order.cc_num.must_equal "9875632147652345"
+          @order.valid?.must_equal true
 
-    it "has a name for the credit card" do
-      order1.cc_name = nil
-      order.valid?.must_equal false
-      order1.errors.messages.must_include :cc_name
+          [nil,"45638","raaaa",""].each do |num|
+            @order.cc_num = num
+            @order.valid?.must_equal false
+          end
+        end
 
-      order1.cc_name = ""
-      order1.valid?.must_equal false
-      order1.errors.messages.must_include :cc_name
+        it "must have a three-digit CVV number" do
+          [nil,"18294673","fuw"].each do |num|
+            @order.cc_cvv = num
+            @order.valid?.must_equal false
+          end
 
-      order1.cc_name "Dan"
-      order1.valid?.must_equal true
-    end
+          ["345","182","666"].each do |num|
+            @order.cc_cvv = num
+            @order.valid?.must_equal true
+          end
+        end
 
-    it "has a 16 digits in length number for the credit card" do
-      [782948281, 9876543219876543].each {|element|
-        o.credit_card = element
-        o.valid?.must_equal false
-      }
-    end
+        it "must have a credit card expiration date that is not in the past" do
+          ["09/16", nil, ""].each do |num|
+            @order.cc_exp = num
+            @order.valid?.must_equal false
+          end
 
-    it "validation for credit card presence" do
-      order.cc_num= nil
-      order.valid?.must_equal false
-      order1.errors.messages.must_include :cc_num
+          ["09/18","11/20"].each do |num|
+            @order.cc_exp = num
+            @order.valid?.must_equal true
+          end
+        end
 
-      order1.cc_num = ""
-      order1.valid?.must_equal false
-      order1.errors.messages.must_include :cc_num
-
-      order1.valid?.must_equal true
-    end
-
-    it "validation for cc_cvv presence" do
-      order.cc_cvv= nil
-      order.valid?.must_equal false
-      order1.errors.messages.must_include :cc_expiry
-
-      order1.cc_expiry = ""
-      order1.valid?.must_equal false
-      order1.errors.messages.must_include :cc_expiry
-
-      order1.valid?.must_equal true
-    end
-
-    it "validation for cc_cvv presence" do
-      order.cc_cvv= nil
-      order.valid?.must_equal false
-      order1.errors.messages.must_include :cc_cvv
-
-      order1.cc_cvv = ""
-      order1.valid?.must_equal false
-      order1.errors.messages.must_include :cc_cvv
-
-      order1.valid?.must_equal true
-    end
-
-    it "validation for billing_zip presence" do
-      order.billing_zip= nil
-      order.valid?.must_equal false
-      order1.errors.messages.must_include :billing_zip
-
-      order1.billing_zip = ""
-      order1.valid?.must_equal false
-      order1.errors.messages.must_include :billing_zip
-
-      order1.valid?.must_equal true
+      end
     end
   end
-
-end
