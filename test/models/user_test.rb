@@ -14,13 +14,13 @@ describe User do
       dan.products.count.must_equal 2
     end
 
-    it "works if user has no products" do
+    it "returns an empty array if user does not have products" do
       dan = users(:three)
       dan.must_respond_to :products
       dan.products.each do |product|
         product.must_be_kind_of Product
       end
-      dan.products.count.must_equal 0
+      dan.products.must_equal []
     end
   end
 
@@ -33,6 +33,7 @@ describe User do
       user.email = "email"
       user.username = "   "
       user.valid?.must_equal false
+      user.errors.messages.must_include :username
 
       user.username = "test username"
       user.valid?.must_equal true
@@ -43,12 +44,14 @@ describe User do
       user.email = "email2"
       user.username = "puppy"
       user.valid?.must_equal false
+      user.errors.messages.must_include :username
     end
 
     it "must have an email" do
       user.username = "username"
       user.email = "    "
       user.valid?.must_equal false
+      user.errors.messages.must_include :email
 
       user.email = "email3"
       user.valid?.must_equal true
@@ -59,6 +62,23 @@ describe User do
       user.username = "name2"
       user.username = "puppy@petsy.com"
       user.valid?.must_equal false
+      user.errors.messages.must_include :email
+    end
+  end
+
+  describe 'custom methods' do
+    it "builds user from auth_hash" do
+      auth_hash = {
+        info: { username: "test username", email: "test@petsy.com" },
+        uid: "124",
+        provider: "github"
+      }
+      user = User.info_from_github(auth_hash)
+
+      user.username.must_equal "test username"
+      user.email.must_equal "test@petsy.com"
+      user.uid.must_equal 124
+      user.provider.must_equal "github"
     end
   end
 end

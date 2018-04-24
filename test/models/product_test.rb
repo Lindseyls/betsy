@@ -19,9 +19,33 @@ describe Product do
 
     end
 
+    it "has a list of categories" do
+      product1.categories.each do |category|
+        category.must_be_instance_of Category
+        category.products.must_be_instance_of Array
+        category.products.must_include product1
+      end
+    end
+
+    it "belongs to many categories" do
+      Product.first.categories << categories(:decor)
+      Product.first.categories << categories(:food)
+      Product.last.categories << categories(:decor)
+      Product.first.categories.must_equal [categories(:decor),categories(:food)]
+      Product.last.categories.must_equal [categories(:decor)]
+    end
+
     it "has reviews" do
       product = products(:product1)
       product.must_respond_to :reviews
+    end
+
+    it "has a list of orderitems " do
+      product1.order_items.each do |order_item|
+        order_item.must_be_instance_of OrderItem
+        order_item.product.must_be_instance_of Product
+        order_item.product.must_equal product1
+      end
     end
 
   end
@@ -30,6 +54,7 @@ describe Product do
       product1.valid?.must_equal true
       product1.name = ""
       product1.valid?.must_equal false
+      product1.errors.messages.must_include :name
     end
 
     it "must have a unique name" do
@@ -94,11 +119,14 @@ describe Product do
       product.show_rating.must_equal 4
     end
 
+    it "returns no reviews when the product does not have reviews" do
+      product.show_rating.must_equal "No reviews"
+    end
 
-    it "returns an array of products" do
+
+    it "returns a list of products" do
       product = products(:product1).pet_type
-
-      Product.pet_type("reptile").must_be_kind_of Array
+      Product.pet_type(product).must_be_kind_of Array
     end
 
   end

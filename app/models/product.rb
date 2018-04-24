@@ -25,7 +25,6 @@ class Product < ApplicationRecord
     return average
   end
 
-
   def self.pet_type(type)
     where(pet_type: type).limit(4)
   end
@@ -41,5 +40,6 @@ class Product < ApplicationRecord
   def self.reptile
     pet_type("reptile")
   end
+
 
 end
