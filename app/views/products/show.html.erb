@@ -30,7 +30,7 @@
     <% end %>
   </p>
 
-  <p>Add to Cart</p>
+  <p><%= link_to("Add to Cart", new_order_item_path(@product), class: "hollow button") %></p>
 
   <p>
    <%= link_to "Leave a Review", new_product_review_path(@product) %>
