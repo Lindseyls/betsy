@@ -3,11 +3,13 @@ class OrdersController < ApplicationController
 # route controller view
 
   def index
-    # this routes to all orders
+    @orders = Order.all
   end
 
   def new
+    @order = Order.new
   end
+
 
   def create
   end
@@ -24,4 +26,7 @@ class OrdersController < ApplicationController
   def destroy
   end
 
+  private
+    def order_params
+     params.require(:order).permit(:status)
 end

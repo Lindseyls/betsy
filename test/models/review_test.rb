@@ -35,5 +35,11 @@ describe Review do
       review.valid?.must_equal false
       review.errors.messages.must_include :rating
     end
+
+    it "requires a rating between 1 and 5" do
+      review = Review.new(rating: 0)
+      review.save
+      review.valid?.must_equal false
+    end
   end
 end
