@@ -2,10 +2,11 @@ class SessionsController < ApplicationController
   def create
     auth_hash = request.env['omniauth.auth']
 
+
     if auth_hash['uid']
       @user = User.find_by(uid: auth_hash[:uid], provider: 'github')
       if @user.nil?
-        @user = User.new(username: auth_hash['info']['name'], email: auth_hash['info']['email'], uid: auth_hash['uid'], provider:auth_hash['provider'])
+        @user = User.info_from_github(auth_hash)
 
         if @user.save
           session[:user_id]= @user.id
@@ -15,10 +16,20 @@ class SessionsController < ApplicationController
           flash[:failure] = "Could not log in"
           redirect_to root_path
         end
+      else
+        session[:user_id]= @user.id
+        flash[:success] = "Logged in successfully"
+        redirect_to root_path
       end
-    end
 
+    else
+
+      flash[:failure] = "Could not log in"
+      redirect_to root_path
+    end
   end
+
+
 
   # def login
   #   username = params[:username]

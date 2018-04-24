@@ -21,3 +21,9 @@ three:
     email: neko@petsy.com
     uid: 3
     provider: github
+
+four:
+  username: Milkah Lamb
+  email: mail@me.org
+  uid: 77621
+  provider: github
