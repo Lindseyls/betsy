@@ -16,20 +16,30 @@ possibly add [:new] to user_products_path -->
   <p><%= @product.description %></p>
   <p><%= @product.stock %> Available</p>
 
-    <ul>
-      <% @product.reviews.each do |review| %>
-      <li>
-        <%= review.rating %>
-        <%= review.comments %>
-        <%= render_date(review.created_at) %>
-      </li>
-      <% end %>
-    </ul>
+  <p>
+    <% if @product.reviews.count == 0 %>
+      <%= @product.show_rating %>
+    <% else %>
+      <ul>
+        <% @product.reviews.each do |review| %>
+          <li>
+            <%= review.rating %>
+            <%= review.comments %>
+            <%= render_date(review.created_at) %>
+          </li>
+        <% end %>
+      </ul>
+    <% end %>
+  </p>
 
   <p>Add to Cart</p>
 
   <p>
    <%= link_to "Leave a Review", new_product_review_path(@product) %>
   </p>
+
+  <div>
+    <%= render partial: "reviews/form", locals: { action_name: "Save My Review" } %>
+  </div>
 
 </div>
