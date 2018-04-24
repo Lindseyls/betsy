@@ -3,7 +3,7 @@ require "test_helper"
 describe SessionsController do
   describe 'auth_callback' do
     it "creates a new user" do
-      user = User.new(provider: 'github', uid: 77621, email: 'mail@me.org', username: 'Milkah Lamb')
+      user = User.new(provider: 'github', uid: 76621, email: 'mail4@me.org', username: 'Lemuel Larsky')
 
       user.must_be :valid?
       original_count = User.count
@@ -38,9 +38,10 @@ describe SessionsController do
     end
 
     it "does not log in with invalid data" do
-      user = User.new(provider: 'github', email: 'mail@me.org', username: 'F')
+      user = User.new(provider: 'github', uid: nil , email: 'mail@me.org', username: 'Milkah Lamb')
 
-      user.must_be :invalid?
+      user.wont_be :valid?
+
       original_count = User.count
 
       # act
@@ -50,7 +51,7 @@ describe SessionsController do
 
       must_redirect_to root_path
       User.count.must_equal original_count
-      session[:user_id].must_equal User.last.id
+
 
     end
 
