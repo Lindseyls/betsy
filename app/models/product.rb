@@ -26,6 +26,21 @@ class Product < ApplicationRecord
   end
 
 
+  def self.by_pet_type
+    # {"cat"=>[product1]}
+    products_by_pets = {}
+
+    Product.all.each do |product|
+      unless products_by_pets.key? product.pet_type
+        # that pet type is not already there
+        products_by_pets[product.pet_type] = []
+      end
+      products_by_pets[product.pet_type] << product
+    end
+
+    return products_by_pets
+  end
+
   def self.pet_type(type)
     where(pet_type: type).limit(4)
   end
