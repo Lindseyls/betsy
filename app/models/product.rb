@@ -25,6 +25,23 @@ class Product < ApplicationRecord
     return average
   end
 
+    # def self.to_category_hash
+    # data = {}
+    # CATEGORIES.each do |cat|
+    #   data[cat] = by_category(cat)
+    # end
+    # return data
+
+  def by_pet_type
+    # organize the products by their pet_type attribute
+    pet_type = @products.where(pet_type: self.pet_type)
+
+    data = {}
+    pet_type.each do |type|
+      data[type] = pet_type(type) #this pet_type refers to class method 
+    end
+    return data
+  end
 
   def self.pet_type(type)
     where(pet_type: type).limit(4)
