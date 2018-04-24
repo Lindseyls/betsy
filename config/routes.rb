@@ -6,6 +6,8 @@ Rails.application.routes.draw do
 
   post '/logout', to: 'sessions#logout', as: 'logout'
 
+  resources :order_items
+
   resources :mains, only: [:index]
 
   resources :categories, only: [:index, :new, :create] do
@@ -17,6 +19,7 @@ Rails.application.routes.draw do
   end
 
   resources :orders
+
 
   resources :products do
     resources :reviews, only: [:new, :create]
