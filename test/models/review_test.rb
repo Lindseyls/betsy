@@ -41,5 +41,19 @@ describe Review do
       review.save
       review.valid?.must_equal false
     end
+
+    it "rating cannot be greater than 5" do
+      review = Review.new(rating: 7)
+      review.save
+      review.valid?.must_equal false
+      review.errors.messages.must_include :rating
+    end
+
+    it "rating cannot be less than 0" do
+      review = Review.new(rating: -3)
+      review.save
+      review.valid?.must_equal false
+      review.errors.messages.must_include :rating
+    end
   end
 end
