@@ -13,17 +13,17 @@ describe Category do
   end
 
   describe "validations" do
+    it "must be valid with all required fields" do
+      category = Category.new(name: "test category")
+      category.save
+      category.valid?.must_equal true
+    end
+
     it "requires a name" do
       category = Category.new(name: nil)
       category.save
       category.valid?.must_equal false
       category.errors.messages.must_include :name
-    end
-
-    it "must be valid with all required fields" do
-      category = Category.new(name: "test category")
-      category.save
-      category.valid?.must_equal true
     end
 
     it "allows products to have multiple categoriess" do
@@ -33,22 +33,20 @@ describe Category do
       category1.valid?.must_equal true
     end
 
-    it "can't apply the same category to one product" do
-      product = Product.first
-      category = Category.first
+    it "must have a unique name" do
+      category_name = "test category"
+      new_category = Category.new(name: category_name)
 
-      product.categories << category
+      new_category.save!
 
-      category = Category.first
-
-      product.categories << category
-
-      product.categories.valid?.must_equal false
-      category.errors.messages.must_include :name
+      new_category2 = Category.new(name: category_name)
+      result = new_category2.save
+      result.must_equal false
+      new_category2.errors.messages.must_include :name
     end
   end
 
   describe "show_products method" do
 
-  end 
+  end
 end
