@@ -1,6 +1,6 @@
 class OrdersController < ApplicationController
-# nic used
-# route controller view
+  # nic used
+  # route controller view
 
   def index
     @orders = Order.all
@@ -27,6 +27,7 @@ class OrdersController < ApplicationController
   end
 
   private
-    def order_params
-     params.require(:order).permit(:status)
+  def order_params
+    params.require(:order).permit(:status)
+  end
 end
