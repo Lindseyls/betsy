@@ -40,7 +40,7 @@ describe SessionsController do
     it "does not log in with invalid data" do
       user = User.new(provider: 'github', email: 'mail@me.org', username: 'F')
 
-      user.must_be :invalid?
+      user.wont_be :valid?
       original_count = User.count
 
       # act
