@@ -1,21 +1,23 @@
 <h3>pEtsy</h3>
 
-<!-- Needs data -->
 <div class="top-margin">
   <h3>Products Offered</h3>
   <div class="caption">
-    <% data.each do |product| %>
-    <%=image_tag(product.photo_url) unless product.photo_url.blank? %>
+    <% Product.by_pet_type.each do |pet_type, products| %>
+    <h4><strong> <%= pet_type %> </strong></h4>
+      <% products.each do |product| %>
+      <%=image_tag(product.photo_url) unless product.photo_url.blank? %>
 
-    <p><strong><%= link_to(product.name, product_path(product)) %></strong></p>
+      <p><strong><%= link_to(product.name, product_path(product)) %></strong></p>
 
-    <p>$<%= product.price %></p>
-    <p><%= product.description %></p>
-    <p><%= product.stock %> Available</p>
-  </div>
-  <div class="ratings">
-    <p>Rating:<%= product.show_rating %></p>
-  </div>
+      <p>$<%= product.price %></p>
+      <p><%= product.description %></p>
+      <p><%= product.stock %> Available</p>
+    </div>
+    <div class="ratings">
+      <p>Rating:<%= product.show_rating %></p>
+    </div>
+    <% end %>
   <% end %>
 </li>
 </div>
