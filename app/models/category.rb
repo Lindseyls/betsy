@@ -7,10 +7,11 @@ class Category < ApplicationRecord
 
     products = self.products
 
-    product_list = products.each do |item|
-    item.name
+    each_product = products.each do |item|
+      item
     end
-    return product_list
+
+    return each_product
   end
 
 end

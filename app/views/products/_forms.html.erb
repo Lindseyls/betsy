@@ -1,17 +1,23 @@
 <section>
   <%= form_for @product do |f| %>
-    <%= f.label :name %>
-    <%= f.text_field :name %>
+  <%= f.label :name %>
+  <%= f.text_field :name %>
 
-    <%= f.label :stock %>
-    <%= f.number_field :stock %>
+  <%= f.label :stock %>
+  <%= f.number_field :stock %>
 
-    <%= f.label :price %>
-    <%= f.number_field :price %>
+  <%= f.label :price %>
+  <%= f.number_field :price %>
 
-    <%= f.label :description %>
-    <%= f.text_area :description %>
+  <%= f.label :description %>
+  <%= f.text_area :description %>
 
-    <%= f.submit class: "button" %>
+  <div>
+    <%= f.label :categories %>
+    <%= collection_check_boxes(:category, :category_ids, Category.all, :id, :name) %>
+  </div>
+
+
+  <%= f.submit class: "button" %>
   <% end %>
 </section>
