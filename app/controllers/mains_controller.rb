@@ -1,6 +1,6 @@
 class MainsController < ApplicationController
 
-  def index
+  def root
     @categories = Category.all
     @cat_products = Product.cat
     @dog_products = Product.dog
