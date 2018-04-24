@@ -10,25 +10,8 @@
 
 <div class="">
   <h2><%= @product.name %></h2>
-  <h4><%= @product.convert_price %></h4>
+  <h4><%= format_price(@product.price) %></h4>
   <p><%= @product.description %></p>
   <p><%= @product.stock %> Available</p>
-
-  <p class="product-review">
-    <% if @product.reviews.count == 0 %>
-      <%= @product.show_rating %>
-    <% else %>
-      <ul>
-        <% @product.reviews.each do |review| %>
-          <li>
-            <%= review.rating %>
-            <%= review.comments %>
-            <%= render_date(review.created_at) %>
-          </li>
-        <% end %>
-      </ul>
-    <% end %>
-  </p>
-
   <p>Add to Cart</p>
 </div>
