@@ -13,7 +13,7 @@ class ProductsController < ApplicationController
 
   def new
     @review = Review.find_by(id: params[:review_id])
-    @product = Product.new(user_id: params[:user_id], review: @review)
+    @product = Product.new(user_id: params[:user_id])
   end
 
   def create
