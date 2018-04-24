@@ -38,9 +38,9 @@ describe SessionsController do
     end
 
     it "does not log in with invalid data" do
-      user = User.new(provider: 'github', uid: , email: 'mail@me.org', username: '')
+      user = User.new(provider: 'github', email: 'mail@me.org', username: 'F')
 
-      user.must_not_be :valid?
+      user.must_be :invalid?
       original_count = User.count
 
       # act
@@ -54,10 +54,10 @@ describe SessionsController do
 
     end
 
+
+    describe 'create' do
+
+    end
+
   end
-
-  describe 'create' do
-
-  end
-
 end
