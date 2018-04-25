@@ -1,0 +1,39 @@
+<section>
+  <h4>Your Shopping Cart</h4>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Product</th>
+        <th>Description</th>
+        <th>Price</th>
+        <th>Quantity</th>
+        <th>Subtotal</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- if there is no order id existing then puts "Your cart is empty. Keep shopping! else then display the items such as below" -->
+      <!-- We think the product should be replaced by order_items but we don't know the full logic -->
+      <% @order.order_items.each do |item| %>
+        <tr>
+          <td><%= link_to item.product.name, product_path(product.id) %></td>
+          <td><%= item.product.description %></td>
+          <td><%= format_price(item.product.price) %></td>
+          <td>
+          <%= form_for item, url: order_item_path, method: :patch do |f| %>
+
+          <%= f.label :quantity %>
+          <%= f.select :quantity, (1..item.available_quantity), :selected => item.quantity %>
+
+          <% end %>
+          </td>
+          <td><%= item.product.sub_total %></td>
+          <td><%= link_to "Update", edit_product_path(item.product.id) %></td>
+          <td><%= link_to "Remove", edit_product_path(item.product.id) %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <h3>Total: <%= format_price(order.total_sum) %></h3>
+</section>
