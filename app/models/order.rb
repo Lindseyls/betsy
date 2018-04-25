@@ -3,7 +3,7 @@ class Order < ApplicationRecord
   STATUS = %w(pending paid complete cancelled)
 
   has_many :order_items, dependent: :destroy
-  
+
 
   validates :status, presence: true, inclusion: { in: STATUS }
   validates :email, presence:true, :if => :confirm_payment?
@@ -33,7 +33,7 @@ class Order < ApplicationRecord
     return item_sub_total
   end
 
-  def total_sum
+  def self.total_sum
     self.each do |sub_total|
       order_total_sum += sub_total
     end
