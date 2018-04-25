@@ -19,10 +19,12 @@ Rails.application.routes.draw do
 
   resources :orders
 
-
   resources :products do
     resources :reviews, only: [:new, :create]
   end
+
+
+  get '/view_cart', to: 'orders#view_cart', as: 'cart'
 
   get "/auth/:provider/callback", to: "sessions#create", as: "auth_callback"
 
