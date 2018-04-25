@@ -12,17 +12,20 @@ class OrdersController < ApplicationController
 
 
   def make_cart
-    if session.nil?
-      # add the product to the session ("cart")
-      # redirect to cart/order view
+    # TODO: adjust quantity to take user input (form?)
+    if current_user
+      @order = Order.find_by(user_id: current_user.id, status: 'pending')
+      OrderItem.new(product_id: params[:product_id], order_id: @order.id, quantity: 1)
 
-      session[:user_id]
-      redirect_to cart_path
-
+      redirect_to order_path(@order.id)
     else
-      # is session not nil?
-      session[:product_id] << @order_items.product_id
-      redirect_to cart_path
+      new_order = Order.create()
+
+      product = OrderItem.new(product_id: params[:product_id], order_id: new_order.id, quantity: 1)
+
+      product.save
+
+      redirect_to order_path(new_order.id)
     end
   end
 
@@ -54,5 +57,5 @@ class OrdersController < ApplicationController
   def order_params
     params.require(:order).permit(:status, :email, :mail_adr, :cc_name,
       :cc_num, :cc_exp, :cc_cvv, :bill_zip)
+    end
   end
-end
