@@ -46,7 +46,7 @@ class OrdersController < ApplicationController
 
       existing_order_item = OrderItem.find_by(product_id: params[:product_id])
 
-      if @product.product_id == existing_order_item
+      # if @product.product_id == existing_order_item
 
       # TODO: possibly change the order item referenced below to the found product quantity
 
