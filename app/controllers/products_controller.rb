@@ -32,6 +32,7 @@ class ProductsController < ApplicationController
   def show
     @product = Product.find_by(id: params[:id])
     @review = Review.new(product: @product)
+    @order_item = OrderItem.new(product: @product, quantity: 1)
   end
 
   # def edit

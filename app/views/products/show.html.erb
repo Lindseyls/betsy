@@ -30,7 +30,11 @@
     <% end %>
   </p>
 
-  <p><%= link_to("Add to Cart", order_path(@product), class: "hollow button") %></p>
+  <p>
+    <%= form_for @order_item do |f| %>
+    <!-- Quantity select -->
+      <%= f.submit "Add to cart" %>
+    <% end %>
 
   <p>
    <%= link_to "Leave a Review", new_product_review_path(@product) %>

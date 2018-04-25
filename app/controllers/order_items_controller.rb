@@ -5,7 +5,9 @@ class OrderItemsController < ApplicationController
   end
 
   def create
-    @order_item = OrderItem.new(order_item_params)
+    @order = Order.find_by(id: session[:order_id])
+    # TODO: what if order DNE
+    @order_item = @order.order_items.new(order_item_params)
 
     if @order_item.save
       flash[:success] = "Product added successfully"
@@ -26,6 +28,6 @@ class OrderItemsController < ApplicationController
 
   private
   def order_item_params
-    params.require(:order_item).permit(:quantity, :order_id, :product_id)
+    params.require(:order_item).permit(:quantity, :product_id)
   end
 end
