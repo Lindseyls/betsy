@@ -32,7 +32,9 @@
 
   <p>
     <%= form_for @order_item do |f| %>
-    <!-- Quantity select -->
+      <%= f.hidden_field :product_id %>
+      <%= f.label :quantity %>
+      <%= f.number_field :quantity %>
       <%= f.submit "Add to cart" %>
     <% end %>
 
