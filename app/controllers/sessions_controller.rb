@@ -9,7 +9,7 @@ class SessionsController < ApplicationController
         @user = User.info_from_github(auth_hash)
 
         if @user.save
-          session[:user_id]= @user.id
+          session[:user_id] = @user.id
           flash[:success] = "Logged in successfully"
           redirect_to root_path
         else
@@ -17,7 +17,7 @@ class SessionsController < ApplicationController
           redirect_to root_path
         end
       else
-        session[:user_id]= @user.id
+        session[:user_id] = @user.id
         flash[:success] = "Logged in successfully"
         redirect_to root_path
       end
