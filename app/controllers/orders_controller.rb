@@ -28,7 +28,7 @@ class OrdersController < ApplicationController
       redirect_to order_path(new_order.id)
     end
   end
-  
+
 
   def show
     @order = Order.find_by(id: params[:id])
@@ -37,10 +37,16 @@ class OrdersController < ApplicationController
   def update
     # TODO: adjust quantity to take user input (form?)
     # TODO: apply the helper methods from order_item.rb to validate stock before updating the quantity
+
+    # if current user has a session, then
+    # increase quantity of product if it already exists OR
+    # create new order item (product_id)
     if current_user
       @order = Order.find_by(user_id: current_user.id, status: 'pending')
 
-      product_quantity = OrderItem.find_by(product_id: params[:product_id])
+      existing_order_item = OrderItem.find_by(product_id: params[:product_id])
+
+      if @product.product_id == existing_order_item
 
       # TODO: possibly change the order item referenced below to the found product quantity
 
