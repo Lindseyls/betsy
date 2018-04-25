@@ -13,6 +13,8 @@ class OrdersController < ApplicationController
 
   def view_cart
     if session[:order_id]= @order.id
+      # is session not nil?
+      session[:order_id]= @order.id
       # add the product to the session ("cart")
       # redirect to cart/order view
     else # if session doesn't exist
