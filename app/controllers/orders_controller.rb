@@ -28,23 +28,48 @@ class OrdersController < ApplicationController
       redirect_to order_path(new_order.id)
     end
   end
-
-  def create
-    # on the order page, have button for proceed to checkout or continue shopping
-
-    # @order = Order.new(order_params)
-    # if @order.save
-    #   flash[:success] = "Thanks for ordering with Petsy!"
-    #   redirect_to order_path(@order.id)
-    # else
-    #   flash[:error] = "Sorry, something went wrong"
-  end
+  
 
   def show
     @order = Order.find_by(id: params[:id])
   end
 
   def update
+    # TODO: adjust quantity to take user input (form?)
+    # TODO: apply the helper methods from order_item.rb to validate stock before updating the quantity
+    if current_user
+      @order = Order.find_by(user_id: current_user.id, status: 'pending')
+
+      product_quantity = OrderItem.find_by(product_id: params[:product_id])
+
+      # TODO: possibly change the order item referenced below to the found product quantity
+
+      if @order.order_id == OrderItem.order_id
+
+        product_quantity.quantity += 1
+
+        product_quantity.save
+
+        redirect_to order_path(@order.id)
+
+      else
+        product = OrderItem.new(product_id: params[:product_id], order_id: new_order.id, quantity: 1)
+
+        product.save
+
+        redirect_to order_path(new_order.id)
+      end
+
+
+    else
+      new_order = Order.create()
+
+      product = OrderItem.new(product_id: params[:product_id], order_id: new_order.id, quantity: 1)
+
+      product.save
+
+      redirect_to order_path(new_order.id)
+    end
   end
 
   def edit
