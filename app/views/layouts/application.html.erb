@@ -14,22 +14,30 @@
 <body>
   <header class="page-header">
     <nav>
+
       <div class="site-nav">
-        <%= link_to "Home", root_path, class: "button" %>
-        <%= "Browse dropdown menu bar" %>
-          <%= link_to "All Products", products_path, class: "button" %>
-          <%= link_to "All Categories", categories_path, class: "button" %>
-          <%= link_to "All Merchants", users_path, class: "button" %>
-        <% if session[:user_id] %>
-        <%= link_to "Log out", logout_path, method: "delete"   %>
-        <% else %>
-        <%= link_to "Login with Github", "/auth/github" %>
-        <% end %>
-      </div>
-    </nav>
-  </header>
+        <ul class="dropdown menu" data-dropdown-menu>
+          <li><%= link_to "Home", root_path, class: "button" %></li>
+          <li>
+            <a href="#" class="button" data-dropdown="drop">Browse</a>
+            <ul id="drop" class="menu">
+              <li><%= link_to "All Products", products_path, class: "button" %></li>
+              <li><%= link_to "All Categories", categories_path, class: "button" %></li>
+              <li><%= link_to "All Merchants", users_path, class: "button" %></li>
+            </ul>
+          </ul>
+          <div class=login>
+            <% if session[:user_id] %>
+            <%= link_to "Log out", logout_path, method: "delete"   %>
+            <% else %>
+            <%= link_to "Login with Github", "/auth/github", class: "button"%>
+            <% end %>
+          </div>
+        </div>
+      </nav>
+    </header>
 
-  <%= yield %>
+    <%= yield %>
 
-</body>
-</html>
+  </body>
+  </html>
