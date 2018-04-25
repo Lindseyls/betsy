@@ -51,12 +51,21 @@ describe SessionsController do
 
       must_redirect_to root_path
       User.count.must_equal original_count
-      
+
 
     end
 
-    describe 'create' do
+    describe 'logout' do
+      it "can logout" do
+        # Arrange
+        login(User.first)
 
+        # Act
+        delete logout_path
+
+        session[:user_id].must_equal nil
+
+      end
     end
 
   end

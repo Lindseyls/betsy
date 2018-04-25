@@ -6,17 +6,33 @@ class OrderItemsController < ApplicationController
 
   def create
     @order = Order.find_by(id: session[:order_id])
-    # TODO: what if order DNE
-    @order_item = @order.order_items.new(order_item_params)
+    if @order
 
-    if @order_item.save
-      flash[:success] = "Product added successfully"
-      redirect_to order_item_path
-    else
-      flash.now[:failure] = "Didn't add to the cart"
-      render :new, status: :bad_request
+      @order_item = @order.order_items.new(order_item_params)
+
+      @order_item.order_id = @order.order_id
+
+    elsif @order.nil?
+      new_order = Order.new()
+      if new_order.save
+        new_order_item = new_order.order_items.new(order_item_params)
+        print new_order_item
+        new_order_item.save
+
+      else
+        flash.now[:failure] = "Didn't add to the cart"
+        redirect_to product_path(@product)
+      end
+
+
+      if @order_item.save
+        flash[:success] = "Product added successfully"
+        redirect_to order_path
+      else
+        flash.now[:failure] = "Didn't add to the cart"
+        redirect_to product_path(@product), status: :bad_request
+      end
     end
-
   end
 
   def update
@@ -28,6 +44,6 @@ class OrderItemsController < ApplicationController
 
   private
   def order_item_params
-    params.require(:order_item).permit(:quantity, :product_id)
+    return params.require(:order_item).permit(:quantity, :product_id)
   end
 end
