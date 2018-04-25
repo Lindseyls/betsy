@@ -11,33 +11,23 @@ class OrdersController < ApplicationController
   end
 
 
-  def view_cart
+  def make_cart
     if session.nil?
-      # is session not nil?
+      # add the product to the session ("cart")
+      # redirect to cart/order view
 
-      session[:product_id] = @order_items.product_id
+      session[:user_id]
       redirect_to cart_path
 
     else
-
+      # is session not nil?
       session[:product_id] << @order_items.product_id
       redirect_to cart_path
-
-    end
-
-
-      if session[:order_id]= @order.id
-      # add the product to the session ("cart")
-      # redirect to cart/order view
-    else # if session doesn't exist
-      # create a new session
-      # redirect to cart/order view
     end
   end
 
   def create
     # on the order page, have button for proceed to checkout or continue shopping
-
 
     # @order = Order.new(order_params)
     # if @order.save
