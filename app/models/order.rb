@@ -3,7 +3,7 @@ class Order < ApplicationRecord
   STATUS = %w(pending paid complete cancelled)
 
   has_many :order_items, dependent: :destroy
-  belongs_to :user
+  
 
   validates :status, presence: true, inclusion: { in: STATUS }
   validates :email, presence:true, :if => :confirm_payment?
