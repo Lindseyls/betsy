@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <title><%= content_for?(:title) ? yield(:title) : "Untitled" %></title>
+  <title><%= content_for?(:title) ? yield(:title) : "pEtsy" %></title>
 
   <%= stylesheet_link_tag    "application" %>
   <%= javascript_include_tag "application", 'data-turbolinks-track' => true %>
@@ -13,31 +13,55 @@
 
 <body>
   <header class="page-header">
-    <nav>
+    <div>
+      <a href="/", class="name">pEtsy</a>
+      <!-- <p class="name">p</<span id="etsy">Etsy</span></p> -->
+    </div>
+    <!-- <nav>
+    <div class="site-nav">
+    <ul class="dropdown menu" data-dropdown-menu>
+    <li><%= link_to "Home", root_path, class: "button" %></li>
+    <li>
+    <a href="#" class="button" data-dropdown="drop">Browse</a>
+    <ul id="drop" class="menu">
+    <li><%= link_to "All Products", products_path, class: "button" %></li>
+    <li><%= link_to "All Categories", categories_path, class: "button" %></li>
+    <li><%= link_to "All Merchants", users_path, class: "button" %></li>
+  </ul>
+</ul>
+<div class=login>
+<% if session[:user_id] %>
+<%= link_to "Log out", logout_path, method: "delete"   %>
+<% else %>
+<%= link_to "Login with Github", "/auth/github", class: "button"%>
+<% end %>
+</div>
+</div>
+</nav> -->
 
-      <div class="site-nav">
-        <ul class="dropdown menu" data-dropdown-menu>
-          <li><%= link_to "Home", root_path, class: "button" %></li>
-          <li>
-            <a href="#" class="button" data-dropdown="drop">Browse</a>
-            <ul id="drop" class="menu">
-              <li><%= link_to "All Products", products_path, class: "button" %></li>
-              <li><%= link_to "All Categories", categories_path, class: "button" %></li>
-              <li><%= link_to "All Merchants", users_path, class: "button" %></li>
-            </ul>
-          </ul>
-          <div class=login>
-            <% if session[:user_id] %>
-            <%= link_to "Log out", logout_path, method: "delete"   %>
-            <% else %>
-            <%= link_to "Login with Github", "/auth/github", class: "button"%>
-            <% end %>
-          </div>
-        </div>
-      </nav>
-    </header>
+<div class="navbar">
+  <a href="/order_items">My Cart</a>
+  <div class="dropdown">
+    <button class="dropbtn">Browse<i class="fa fa-caret-down"></i></button>
+    <div class="dropdown-content">
+      <a href="#"><%= link_to "All Products", products_path%></a>
+      <a href="#"><%= link_to "All Categories", categories_path%></a>
+      <a href="#"><%= link_to "All Merchants", users_path%></a>
+    </div>
+  </div>
+  <div class=login>
+    <% if session[:user_id] %>
+    <%= link_to "Log out", logout_path, method: "delete"   %>
+    <% else %>
+    <%= link_to "Login with Github", "/auth/github"%>
+    <% end %>
+  </div>
+</div>
 
-    <%= yield %>
+</header>
 
-  </body>
-  </html>
+<%= yield %>
+
+</body>
+
+</html>
