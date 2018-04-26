@@ -19,7 +19,16 @@
       <p><%= product.description %></p>
       <p><%= product.stock %> Available</p>
       <span class="glyphicon glyphicon-star"></span>
-      <p>Rating:<%= render_stars(product.no_of_stars) %></p>
+
+      <p> Rating:
+      <% if product.reviews.count == 0 %>
+        <%= product.show_rating %>
+      <% else %>
+        <% product.reviews.each do |review| %>
+          <%= render_stars(product.no_of_stars) %>
+        <% end %>
+      <% end %>
+      </p>
 
     </div>
   </div>

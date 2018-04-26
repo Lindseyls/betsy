@@ -10,19 +10,20 @@
     <p><%= @product.stock %> Available</p>
 
     <p class="product-review">
-      <% if @product.reviews.count == 0 %>
-      <%= @product.show_rating %>
-      <% else %>
+      <h5>Product Reviews:</h5>
       <ul>
-        <% @product.reviews.each do |review| %>
+        <% if @product.reviews.count == 0 %>
         <li>
+          <%= @product.show_rating %>
+        <% else %>
+        <% @product.reviews.each do |review| %>
           <%= review.rating %>
           <%= review.comments %>
           <%= render_date(review.created_at) %>
+          <% end %>
         </li>
         <% end %>
       </ul>
-      <% end %>
     </p>
 
     <p>
