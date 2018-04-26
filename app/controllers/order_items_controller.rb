@@ -1,8 +1,9 @@
 class OrderItemsController < ApplicationController
 
-def index
-  @order_items = OrderItem.all
-end
+  def index
+    @order_items = OrderItem.all
+  end
+  
   def new
     @order_item = OrderItem.new(order_id: params[:order_id])
   end

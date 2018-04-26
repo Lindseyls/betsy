@@ -19,18 +19,13 @@
           <td><%= link_to(item.product.name, product_path(item.product.id)) %></td>
           <td><%= item.product.description %></td>
           <td><%= format_price(item.product.price) %></td>
-          </td>
           <% end %>
 
-          <td><%= @order_items.each do |item| %></td>
-          <td><% total = 0 %></td>
-          <td><% total += item.product.price %></td>
-          <td><% return total %></td>
-          <td><%= total %></td>
-          <% end %>
+          <td><%=OrderItem.sub_total(@order_items)%><td>
 
-          <td><%= link_to "Update", edit_product_path(item.product.id) %></td>
-          <td><%= link_to "Remove", edit_product_path(item.product.id) %></td>
+
+
+
         </tr>
     </tbody>
   </table>
