@@ -50,6 +50,12 @@ class ProductsController < ApplicationController
   #
   # end
 
+  def reviews
+    @reviews = Review.all
+    # call method that takes average on all reviews 
+  end
+
+
   private
 
   def product_params

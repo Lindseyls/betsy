@@ -1,5 +1,5 @@
 class Product < ApplicationRecord
-  
+
   has_many :order_items
   has_many :reviews, dependent: :destroy
   belongs_to :user, optional: true
@@ -25,6 +25,10 @@ class Product < ApplicationRecord
 
     average = total/reviews.count
     return average
+  end
+
+  def no_of_stars
+    self.show_rating
   end
 
 
