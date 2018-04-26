@@ -1,14 +1,14 @@
 <section>
   <h3>Thanks for your order!</h3>
 
-  <p>Order Total: $<%= @order.total_sum %></p>
-  <p>Order Status: <%= @order.status %></p>
+  <p>Order Total:</p>
+  <p>Order Status: <%= @order.confirm_payment? %></p>
   <div>
     <h4>Customer Information</h4>
     <ul>
       <li>Name: <%= @order.cc_name %></li>
       <li>Email: <%= @order.email %></li>
-      <li>Credit Card: *<%= @order.cc_num[-4..-1] %></li>
+      <li>Credit Card: <%= @order.cc_num%></li>
       <li>Shipping Address: <%= @order.mail_adr %></li>
       <li>Order Status: <%= @order.status %></li>
     </ul>
@@ -25,11 +25,13 @@
         <tr>
           <td><%= item.product.name%></td>
           <td><%= item.quantity %></td>
-          <td><%= item.product.price %></td>
-          <td><%= item.subtotal %></td>
+          <td><%= format_price(item.product.price) %></td>
+          <td><%= format_price(item.sub_total) %></td>
         </tr>
         <% end %>
       </tr>
     </table>
+
+    <%= link_to "Cancel", method: :put, class: "button" %>
   </div>
 </section>

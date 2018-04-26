@@ -25,13 +25,22 @@ class OrderItem < ApplicationRecord
 
   end
 
-  def self.sub_total(cart)
-    total = 0
-    cart.each do |product|
-      total += cart.price
-    end
+  def sub_total
+    price = self.product.price
+    quantity = self.quantity
+    sub_total = price * quantity
 
-    return total
+    return sub_total
   end
 
+  def total_sum
+    total = 0
+    self.each do |item|
+      sub_total = item.sub_total
+      total =+ sub_total
+      return total
+    end
+  end
+
+  
 end

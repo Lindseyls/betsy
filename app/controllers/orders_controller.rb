@@ -35,10 +35,35 @@ class OrdersController < ApplicationController
   end
 
   def update
-    # Add credit card info, shipping, etc
+    # @order.assign_attributes(order_params)
+    if params[:order][:cc_name] == " "
+      flash[:failure] = 'Please enter the required information to complete your order.'
+      redirect_to new_order_path
+    else
+      @order = Order.new(
+        status: 'pending',
+        cc_name: params[:order][:cc_name],
+        email: params[:order][:email],
+        mail_adr: params[:order][:mail_adr],
+        cc_num: params[:order][:cc_num],
+        cc_exp: params[:order][:cc_exp],
+        cc_cvv: params[:order][:cc_cvv],
+        bill_zip: params[:order][:bill_zip],
+      )
+      result = @order.save
+
+      if result
+        flash[:success] = 'Your order has been placed'
+        redirect_to order_path
+      else
+        flash[:failure] = 'Something went wrong. Please place your order again'
+        redirect_to order_path
+      end
+    end
   end
 
   def edit
+    @order = Order.find_by(id: params[:id])
   end
 
   def destroy

@@ -3,7 +3,7 @@ class OrderItemsController < ApplicationController
   def index
     @order_items = OrderItem.all
   end
-  
+
   def new
     @order_item = OrderItem.new(order_id: params[:order_id])
   end
@@ -36,6 +36,13 @@ class OrderItemsController < ApplicationController
 
     @order_item.update(id: params[:id], shipped: true)
     redirect_to user_path
+  end
+
+  def destroy
+    @order_item.destroy
+    flash[:status] = :success
+    flash[:result_text] = "Successfully deleted"
+    redirect_to orders_path
   end
 
   private

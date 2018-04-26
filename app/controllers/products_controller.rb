@@ -13,18 +13,26 @@ class ProductsController < ApplicationController
   end
 
   def new
-    @product = Product.new(user_id: params[:user_id])
+    if current_user
+      @product = Product.new(user_id: params[:user_id])
+    else
+      flash[:status] = :failure
+      flash[:result_text] = "You need to be logged in to add a product"
+      redirect_to products_path
+    end
   end
 
   def create
-    @product = Product.new(product_params)
+    if current_user
+      @product = Product.new(product_params)
 
-    if @product.save
-      flash[:success] = "Product added successfully"
-      redirect_to products_path
-    else
-      flash.now[:failure] = "Validations Failed"
-      render :new, status: :bad_request
+      if @product.save
+        flash[:success] = "Product added successfully"
+        redirect_to products_path
+      else
+        flash.now[:failure] = "Validations Failed"
+        render :new, status: :bad_request
+      end
     end
 
   end
