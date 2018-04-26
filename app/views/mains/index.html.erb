@@ -1,41 +1,55 @@
-<section>
-  <h3>Cats</h3>
+<div class ="container">
+<section class = "pet-type">
+  <h3 class="pet-name">Cats</h3>
+  <div>
+    <%= image_tag "cat.jpg", width:"200", height:"400", class:"pictures"%>
+  </div>
+  <p>New Arrivals</p>
   <ul>
     <% @cat_products.each do |product| %>
-      <li>
+      <li class="list">
         <h4>
           <%= link_to product.name, product_path(product) %>
-          <small>price <%= format_price(product.price) %></small>
+          <small><%= format_price(product.price) %></small>
         </h4>
       </li>
     <% end %>
   </ul>
 </section>
 
-<section>
-  <h3>Dogs</h3>
+<section class = "pet-type">
+  <h3 class="pet-name">Dogs</h3>
+  <div>
+      <%= image_tag "dog_home.jpg", width:"200", height:"400", class:"pictures"%>
+  </div>
+  <p>New Arrivals</p>
   <ul>
     <% @dog_products.each do |product| %>
-      <li>
+      <li class="list">
         <h4>
           <%= link_to product.name, product_path(product) %>
-          <small>price <%= format_price(product.price) %></small>
+          <small><%= format_price(product.price) %></small>
         </h4>
       </li>
     <% end %>
   </ul>
 </section>
 
-<section>
-  <h3>Reptiles</h3>
+<section class = "pet-type">
+  <h3 class="pet-name">Reptiles</h3>
+  <div>
+      <%= image_tag "reptile_home.jpg", width:"200", height:"400", class:"pictures"%>
+  </div>
+  <p>New Arrivals</p>
   <ul>
     <% @reptile_products.each do |product| %>
-      <li>
+    <li class="list">
         <h4>
           <%= link_to product.name, product_path(product) %>
-          <small>price <%= format_price(product.price) %></small>
+          <small><%= format_price(product.price) %></small>
         </h4>
       </li>
     <% end %>
   </ul>
 </section>
+</div>
