@@ -12,5 +12,11 @@ module ApplicationHelper
     "$" + format("%.2f", price/100)
   end
 
-
+  def render_stars(value)
+    output = ''
+    if (1..5).include?(value.to_i)
+      value.to_i.times { output += image_tag("star.png", class: "style-image")}
+    end
+    output.html_safe
+  end
 end

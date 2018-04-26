@@ -19,7 +19,7 @@
       <p><%= product.description %></p>
       <p><%= product.stock %> Available</p>
       <span class="glyphicon glyphicon-star"></span>
-      <p>Rating:<%= product.show_rating %></p>
+      <p>Rating:<%= render_stars(product.no_of_stars) %></p>
 
     </div>
   </div>
