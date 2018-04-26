@@ -1,37 +1,32 @@
 class OrderItemsController < ApplicationController
 
+def index
+  @order_items = OrderItem.all
+end
   def new
     @order_item = OrderItem.new(order_id: params[:order_id])
   end
 
   def create
+    # Step 1: Find or create an order
     @order = Order.find_by(id: session[:order_id])
-    if @order
-
-      @order_item = @order.order_items.new(order_item_params)
-
-      @order_item.order_id = @order.order_id
-
-    elsif @order.nil?
-      new_order = Order.new()
-      if new_order.save
-        new_order_item = new_order.order_items.new(order_item_params)
-        print new_order_item
-        new_order_item.save
-
-      else
-        flash.now[:failure] = "Didn't add to the cart"
-        redirect_to product_path(@product)
+    unless @order
+      @order = Order.new()
+      unless @order.save
+        flash.now[:failure] = "Didn't add to the cart: #{@order.errors.messages}"
+        redirect_back fallback_location: root_path
+        return
       end
+    end
 
-
-      if @order_item.save
-        flash[:success] = "Product added successfully"
-        redirect_to order_path
-      else
-        flash.now[:failure] = "Didn't add to the cart"
-        redirect_to product_path(@product), status: :bad_request
-      end
+    # If we get here we're guaranteed to have an order
+    @order_item = @order.order_items.new(order_item_params)
+    if @order_item.save
+      flash[:success] = "Product added successfully"
+      redirect_to order_items_path
+    else
+      flash.now[:failure] = "Didn't add to the cart"
+      redirect_to product_path(@order_item.product_id), status: :bad_request
     end
   end
 
