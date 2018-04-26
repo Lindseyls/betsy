@@ -35,9 +35,9 @@ class ProductsController < ApplicationController
     @order_item = OrderItem.new(product: @product, quantity: 1)
   end
 
-  # def edit
-  #
-  # end
+  def edit
+
+  end
 
   # def update
   #   @product.update_attributes(product_params)
