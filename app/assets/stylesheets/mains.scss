@@ -1,3 +1,67 @@
 // Place all the styles related to the mains controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.pictures {
+  border-radius: 70%;
+}
+
+.homepage-picture {
+  margin-left: 10%;
+}
+
+span {
+  padding-right: 5%;
+  color: #00cc66;
+  font-size: 30pt;
+}
+
+.shop-now {
+  display: flex;
+}
+.container {
+  display: flex;
+  align-items: center;
+  padding-top: 5%;
+  padding-left: 10%;
+
+}
+
+.name {
+  font-size: 50pt;
+  color: red;
+}
+
+#etsy {
+  color: green;
+}
+
+.site-nav {
+  background-color: red;
+}
+
+.image{
+  float:right;  
+}
+.pet-name {
+  color: #ff6600;
+  padding-left: 10%;
+}
+
+.pet-type {
+  display: flex;
+  flex-direction: row;
+  padding-top: 5%;
+  padding-left: 10%;
+  padding-right: 10%;
+}
+
+.list {
+  list-style-type: none;
+  color: red;
+}
+
+.list a {
+  list-style-type: none;
+  color: black;
+}

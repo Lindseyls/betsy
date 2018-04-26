@@ -1,49 +1,46 @@
-<div class="">
+<div class="container">
 
-<h2>Merchant: <%= link_to @product.user_id, user_path %></h2>
+  <h2>Merchant: <%= link_to @product.user_id, user_path %></h2>
 
-</div>
+  <div class="thumbnail">
+    <%=image_tag(@product.photo_url)%>
+    <h2><%= @product.name %></h2>
+    <h4><%= format_price(@product.price) %></h4>
+    <p><%= @product.description %></p>
+    <p><%= @product.stock %> Available</p>
 
-<div class="">
-  <%=image_tag(@product.photo_url)%>
-</div>
-
-<div class="">
-  <h2><%= @product.name %></h2>
-  <h4><%= format_price(@product.price) %></h4>
-  <p><%= @product.description %></p>
-  <p><%= @product.stock %> Available</p>
-
-  <p class="product-review">
-    <% if @product.reviews.count == 0 %>
+    <p class="product-review">
+      <% if @product.reviews.count == 0 %>
       <%= @product.show_rating %>
-    <% else %>
+      <% else %>
       <ul>
         <% @product.reviews.each do |review| %>
-          <li>
-            <%= review.rating %>
-            <%= review.comments %>
-            <%= render_date(review.created_at) %>
-          </li>
+        <li>
+          <%= review.rating %>
+          <%= review.comments %>
+          <%= render_date(review.created_at) %>
+        </li>
         <% end %>
       </ul>
-    <% end %>
-  </p>
+      <% end %>
+    </p>
 
-  <p>
-    <%= form_for @order_item do |f| %>
+    <p>
+      <%= form_for @order_item do |f| %>
       <%= f.hidden_field :product_id %>
       <%= f.label :quantity %>
       <%= f.number_field :quantity %>
-      <%= f.submit "Add to cart" %>
-    <% end %>
+      <%= f.submit "Add to cart" , class:"button"%>
+      <% end %>
 
-  <p>
-   <%= link_to "Leave a Review", new_product_review_path(@product) %>
-  </p>
+      <p>
+        <%= link_to "Write a Review", new_product_review_path(@product) %>
+      </p>
 
-  <div>
-    <%= render partial: "reviews/form", locals: { action_name: "Save My Review" } %>
+      <div>
+        <%= render partial: "reviews/form", locals: { action_name: "Save My Review" } %>
+      </div>
+
+    </div>
   </div>
-
 </div>

@@ -33,11 +33,11 @@ class Order < ApplicationRecord
     return item_sub_total
   end
 
-  def self.total_sum
-    self.each do |sub_total|
-      order_total_sum += sub_total
-    end
-    return order_total_sum
-  end
+  # def self.total_sum
+  #   self.each do |sub_total|
+  #     order_total_sum += sub_total
+  #   end
+  #   return order_total_sum
+  # end
 
 end
