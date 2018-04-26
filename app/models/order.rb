@@ -29,8 +29,8 @@ class Order < ApplicationRecord
   end
 
   def sub_total
-    item_sub_total = self.product.price * self.quantity
-    return item_sub_total
+    # item_sub_total = self.product.price * self.quantity
+    # return item_sub_total
   end
 
   # def self.total_sum
