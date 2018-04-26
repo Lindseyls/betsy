@@ -39,10 +39,11 @@ class OrderItemsController < ApplicationController
   end
 
   def destroy
+    @order_item = OrderItem.find_by(id: params[:id])
     @order_item.destroy
     flash[:status] = :success
     flash[:result_text] = "Successfully deleted"
-    redirect_to orders_path
+    redirect_to order_items_path
   end
 
   private

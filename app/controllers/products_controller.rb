@@ -16,7 +16,6 @@ class ProductsController < ApplicationController
     if current_user
       @product = Product.new(user_id: params[:user_id])
     else
-      flash[:status] = :failure
       flash[:result_text] = "You need to be logged in to add a product"
       redirect_to products_path
     end
