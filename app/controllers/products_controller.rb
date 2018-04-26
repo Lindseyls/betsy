@@ -13,12 +13,12 @@ class ProductsController < ApplicationController
   end
 
   def new
-    if current_user
+    # if current_user
       @product = Product.new(user_id: params[:user_id])
-    else
-      flash[:result_text] = "You need to be logged in to add a product"
-      redirect_to products_path
-    end
+    # else
+    #   flash[:result_text] = "You need to be logged in to add a product"
+    #   redirect_to products_path
+    # end
   end
 
   def create
