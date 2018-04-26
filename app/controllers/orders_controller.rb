@@ -35,7 +35,8 @@ class OrdersController < ApplicationController
   end
 
   def update
-    if params[:order][:status] == " "
+    # @order.assign_attributes(order_params)
+    if params[:order][:cc_name] == " "
       flash[:failure] = 'Please enter the required information to complete your order.'
       redirect_to new_order_path
     else
