@@ -6,11 +6,25 @@
   border-radius: 70%;
 }
 
+.homepage-picture {
+  margin-left: 10%;
+}
+
+span {
+  padding-right: 5%;
+  color: #00cc66;
+  font-size: 30pt;
+}
+
+.shop-now {
+  display: flex;
+}
 .container {
   display: flex;
   align-items: center;
-  padding-top: 10%;
+  padding-top: 5%;
   padding-left: 10%;
+
 }
 
 .name {
@@ -26,13 +40,20 @@
   background-color: red;
 }
 
+.image{
+  float:right;  
+}
 .pet-name {
-  color: green;
+  color: #ff6600;
   padding-left: 10%;
 }
 
 .pet-type {
-  padding-left: 5%;
+  display: flex;
+  flex-direction: row;
+  padding-top: 5%;
+  padding-left: 10%;
+  padding-right: 10%;
 }
 
 .list {

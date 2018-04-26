@@ -3,4 +3,14 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 .container-products{
   display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-items:center;
+
+}
+
+.container{
+  display: inline;
+  margin-left: 10%;
+
 }

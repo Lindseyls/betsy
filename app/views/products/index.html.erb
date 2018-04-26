@@ -1,19 +1,26 @@
 
 <div class="top-margin">
-  <h3>Products Offered</h3>
+  <h3>New Collection of Products</h3>
+  <%= link_to root_path do %>
+   <%= image_tag "cat.jpg", width:"200", height:"400", class: "pictures" %>
+   <%= image_tag "dog_home.jpg", width:"200", height:"400", class:"pictures"%>
+   <%= image_tag "reptile_home.jpg", width:"200", height:"400", class:"pictures"%>
+<% end %>
 
   <% Product.by_pet_type.each do |pet_type, products| %>
   <h4><strong> <%= pet_type %> </strong></h4>
 
   <% products.each do |product| %>
-  <div class="container-products">
-    <div>
+  <div class="thumbnail">
+    <div class="container-products">
       <%=image_tag(product.photo_url) unless product.photo_url.blank?%>
       <p><strong><%= link_to(product.name, product_path(product)) %></strong></p>
       <p><%= format_price(product.price) %></p>
       <p><%= product.description %></p>
       <p><%= product.stock %> Available</p>
+      <span class="glyphicon glyphicon-star"></span>
       <p>Rating:<%= product.show_rating %></p>
+
     </div>
   </div>
 </div>

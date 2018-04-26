@@ -1,55 +1,65 @@
-<div class ="container">
-<section class = "pet-type">
-  <h3 class="pet-name">Cats</h3>
-  <div>
-    <%= image_tag "cat.jpg", width:"200", height:"400", class:"pictures"%>
-  </div>
-  <p>New Arrivals</p>
-  <ul>
-    <% @cat_products.each do |product| %>
-      <li class="list">
-        <h4>
-          <%= link_to product.name, product_path(product) %>
-          <small><%= format_price(product.price) %></small>
-        </h4>
-      </li>
-    <% end %>
-  </ul>
-</section>
+<article>
+  <section>
+    <%= image_tag "dog_shopping.jpg", width:"500", height:"500", class:"homepage-picture"%>
+    <strong><span>New Arrivals</span></strong>
+    <span><%= link_to "Shop Now", products_path, class:"button  " %></span>
+  </section>
+  <hr>
+  <div class = "pet-type">
+    <section >
+      <h3 class="pet-name">Cats</h3>
+      <div>
+        <%= image_tag "cat.jpg", width:"200", height:"400", class:"pictures"%>
+      </div>
 
-<section class = "pet-type">
-  <h3 class="pet-name">Dogs</h3>
-  <div>
-      <%= image_tag "dog_home.jpg", width:"200", height:"400", class:"pictures"%>
-  </div>
-  <p>New Arrivals</p>
-  <ul>
-    <% @dog_products.each do |product| %>
-      <li class="list">
-        <h4>
-          <%= link_to product.name, product_path(product) %>
-          <small><%= format_price(product.price) %></small>
-        </h4>
-      </li>
-    <% end %>
-  </ul>
-</section>
+      <ul>
+        <% @cat_products.each do |product| %>
+        <li class="list">
+          <h5>
+            <%= link_to product.name, product_path(product) %>
+            <%=image_tag(product.photo_url) unless product.photo_url.blank?%>
+            <small><%= format_price(product.price) %></small>
+          </h5>
+        </li>
+        <% end %>
+      </ul>
+    </section>
 
-<section class = "pet-type">
-  <h3 class="pet-name">Reptiles</h3>
-  <div>
-      <%= image_tag "reptile_home.jpg", width:"200", height:"400", class:"pictures"%>
+    <section>
+      <h3 class="pet-name">Dogs</h3>
+      <div>
+        <%= image_tag "dog_home.jpg", width:"200", height:"400", class:"pictures"%>
+      </div>
+
+      <ul>
+        <% @dog_products.each do |product| %>
+        <li class="list">
+          <h5>
+            <%= link_to product.name, product_path(product) %>
+            <%=image_tag(product.photo_url)%>
+            <%= format_price(product.price) %>
+          </h5>
+        </li>
+        <% end %>
+      </ul>
+    </section>
+
+    <section>
+      <h3 class="pet-name">Reptiles</h3>
+      <div>
+        <%= image_tag "reptile_home.jpg", width:"200", height:"400", class:"pictures"%>
+      </div>
+      <ul>
+        <% @reptile_products.each do |product| %>
+        <li class="list">
+          <h5>
+            <%= link_to product.name, product_path(product) %>
+            <%=image_tag(product.photo_url) unless product.photo_url.blank?%>
+            <small><%= format_price(product.price) %></small>
+          </h5>
+        </li>
+        <% end %>
+      </ul>
+    </section>
   </div>
-  <p>New Arrivals</p>
-  <ul>
-    <% @reptile_products.each do |product| %>
-    <li class="list">
-        <h4>
-          <%= link_to product.name, product_path(product) %>
-          <small><%= format_price(product.price) %></small>
-        </h4>
-      </li>
-    <% end %>
-  </ul>
-</section>
-</div>
+</article>
