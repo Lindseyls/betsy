@@ -33,6 +33,10 @@ class ProductsController < ApplicationController
         flash.now[:failure] = "Validations Failed"
         render :new, status: :bad_request
       end
+    else
+      flash[:status] = :failure
+      flash[:result_text] = "You are not allowed to create a product"
+      redirect_to products_path
     end
 
   end
@@ -44,23 +48,48 @@ class ProductsController < ApplicationController
   end
 
   def edit
+    if current_user
+      if @user.id != @product.user.id
+        flash[:status] = :failure
+        flash[:result_text] = "This isn't your product!"
+        redirect_to product_path(@product.id)
+      end
+    else
+      flash[:status] = :failure
+      flash[:result_text] = "You need to log in to edit!"
+      redirect_to product_path(@product.id)
+    end
+
 
   end
 
-  # def update
-  #   @product.update_attributes(product_params)
-  #   @product.save
-  # end
-  #
-  # def destroy
-  #   @product.destroy
-  #   redirect_to root_path
-  #
-  # end
+  def update
+    if find_user && (@user.id != @product.user.id)
+      flash[:status] = :failure
+      flash[:result_text] = "Oops..This isn't your product!"
+      redirect_to product_path(@product.id)
+    else
+      if @product.save
+        flash[:status] = :success
+        flash[:result_text] = "Successfully updated #{@product.name}!"
+        redirect_to product_path
+      else
+        flash.now[:status] = :error
+        flash.now[:result_text] = "#{@product.name} could not be updated"
+        render :edit, status: :bad_request
+      end
+    end
+  end
+
+  def destroy
+    @product.destroy
+    redirect_to root_path
+
+  end
 
   def reviews
     @reviews = Review.all
-    # call method that takes average on all reviews 
+    # call method that takes average on all reviews
   end
 
 
