@@ -15,20 +15,17 @@
       <!-- if there is no order id existing then puts "Your cart is empty. Keep shopping! else then display the items such as below" -->
       <!-- We think the product should be replaced by order_items but we don't know the full logic -->
       <% @order_items.each do |item| %>
-        <tr>
-          <td><%= link_to(item.product.name, product_path(item.product.id)) %></td>
-          <td><%= item.product.description %></td>
-          <td><%= format_price(item.product.price) %></td>
-          <% end %>
-
-          <td><%=OrderItem.sub_total(@order_items)%><td>
-
-
-
-
-        </tr>
+      <tr>
+        <td><%= link_to(item.product.name, product_path(item.product.id)) %></td>
+        <td><%= item.product.description %></td>
+        <td><%= format_price(item.product.price) %></td>
+        <td><%= item.quantity %></td>
+        <td><%= format_price(item.sub_total) %></td>
+        <% end %>
+      </tr>
     </tbody>
   </table>
+  <%= link_to "Place my order", edit_order_path(@order_items.first.order_id), class:"button" %>
 
-  <h3>Total: <%= format_price(order.total_sum) %></h3>
+
 </section>
