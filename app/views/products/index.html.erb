@@ -22,11 +22,9 @@
 
       <p> Rating:
       <% if product.reviews.count == 0 %>
-        <%= product.show_rating %>
+          No reviews
       <% else %>
-        <% product.reviews.each do |review| %>
-          <%= render_stars(product.no_of_stars) %>
-        <% end %>
+          <%= render_stars(product.show_rating) %>
       <% end %>
       </p>
 
