@@ -1,17 +1,21 @@
 <section>
   <h3>Categories</h3>
   <ul>
-    <% @categories.each do |category, products| %>
-    <li>
+    <% @categories.each do |category| %>
+
       <h4><%= category.name%></h4>
+
+    <li>
+    <% category.products.each do |product| %>
       <ul>
-        <% products.each do |product| %>
-        <%= product.product.name %>
-        <%= product.price %>
-        <%= product.description %>
-        <%= product.stock %>
-        <% end %>
+        <li>
+          <%= product.name %>
+          <%= format_price(product.price) %>
+          <%= product.description %>
+          <%= product.stock %>
+        </li>
       </ul>
+      <% end %>
     </li>
     <% end %>
   </ul>
