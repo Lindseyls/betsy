@@ -21,15 +21,17 @@
       <th>Price</th>
       <th>Subtotal</th>
       <tr>
-        <% @order_items.each do |item| %>
+        <% @order.order_items.each do |item| %>
         <tr>
           <td><%= item.product.name%></td>
           <td><%= item.quantity %></td>
           <td><%= item.product.price %></td>
-          <td><%= item.subtotal %></td>
+          <td><%= item.sub_total %></td>
         </tr>
         <% end %>
       </tr>
     </table>
+
+    <%= link_to "Cancel", method: :put, class: "button" %>
   </div>
 </section>
