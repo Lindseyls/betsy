@@ -6,7 +6,7 @@
       <%= link_to(user.username, user_path(user.id), alt: 'link to') %>
       <li>
         <% user.products.each do |product| %>
-        <ul>
+        <ul class="container-products">
           <li>
             <%=image_tag product.photo_url unless product.photo_url.blank?%>
           </li>

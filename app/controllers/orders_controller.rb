@@ -36,20 +36,20 @@ class OrdersController < ApplicationController
   end
 
   def update
-
     @order = Order.find_by(id: params[:id])
-    @order.assign_attributes(order_params)
+    @order.status = "paid"
+    if @order.save
 
-    result = @order.update(order_params)
+      @order.assign_attributes(order_params)
 
-    if result
-      flash[:success] = 'Your order has been placed'
-      redirect_to order_path
+      if @order.save
+        flash[:success] = 'Your order has been placed'
+        redirect_to order_path
+      end
     else
       flash[:failure] = 'Something went wrong. Please place your order again'
       redirect_to order_path
     end
-
   end
 
   def edit

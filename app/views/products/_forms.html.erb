@@ -1,4 +1,8 @@
 <section>
+
+  <%= render partial: "layouts/error_messages", locals: { model: @product } %>
+
+
   <%= form_for @product do |f| %>
   <%= f.label :name %>
   <%= f.text_field :name %>

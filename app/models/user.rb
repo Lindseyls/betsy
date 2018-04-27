@@ -5,11 +5,17 @@ class User < ApplicationRecord
   validates :email, presence: true, uniqueness: true
 
   def self.info_from_github(auth_hash)
-    return User.new(
-      username: auth_hash[:info][:username],
-      email: auth_hash[:info][:email],
+
+    user_data = {
       uid: auth_hash[:uid],
-      provider: auth_hash[:provider]
-    )
+      username: auth_hash[:info][:nickname],
+      email: auth_hash[:info][:email],
+      provider: auth_hash[:provider]}
+
+      user = self.new(user_data)
+      if user.save
+        return user
+      end
+
   end
 end

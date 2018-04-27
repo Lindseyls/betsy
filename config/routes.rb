@@ -4,7 +4,7 @@ Rails.application.routes.draw do
 
   root 'mains#index'
 
-  post '/logout', to: 'sessions#logout', as: 'logout'
+  delete '/logout', to: 'sessions#logout', as: 'logout'
   resources :order_items
 
   resources :mains, only: [:index]
@@ -17,7 +17,7 @@ Rails.application.routes.draw do
     resources :products, only: [:index]
   end
 
-  resources :orders 
+  resources :orders
 
   resources :products do
     resources :reviews, only: [:new, :create]

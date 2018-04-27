@@ -1,9 +1,13 @@
 <h3>User Summary: <%= link_to @user.username, user_path(@user) %></h3>
 <p>Joined site <%= render_date @user.created_at %></p>
 
+<%= render partial: "layouts/error_messages", locals: { model: @user } %>
+
+
 <p><%= link_to "Add Product", new_product_path, class:"button" %></p>
 <p><%= link_to "Add Category", new_category_path %></p>
 <p><%= link_to "Order Summary" %></p>
+<p><%= link_to "All Merchants", users_path%></p>
 
 <h4>Products</h4>
 <table>

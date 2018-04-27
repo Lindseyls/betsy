@@ -51,7 +51,8 @@
   </div>
 
   <div class=login>
-    <% if session[:user_id] %>
+    <% if @login_user %>
+      <%= link_to "Logged in as #{@login_user.username}", user_path(@login_user) %>
       <%= link_to "Log Out", logout_path, method: :delete  %>
     <% else %>
       <%= link_to "Login with Github", "/auth/github" %>

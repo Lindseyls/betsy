@@ -27,7 +27,7 @@ class OrderItemsController < ApplicationController
       redirect_to order_items_path
     else
       flash.now[:failure] = "Didn't add to the cart"
-      redirect_to product_path(@order_item.product_id), status: :bad_request
+      redirect_to products_path, status: :bad_request
     end
   end
 
@@ -37,17 +37,18 @@ class OrderItemsController < ApplicationController
     @order_item.save
     redirect_to order_items_path
 
+    @order_item.assign_attributes(order_item_params)
+    @order_item.save
+    redirect_to order_items_path
   end
 
-  def show
+  def edit
+    @order_item = OrderItem.find_by(id: params[:id])
   end
 
   def destroy
-    @order_item = OrderItem.find_by(id: params[:id])
-    @order_item.destroy
-    flash[:status] = :success
-    flash[:result_text] = "Successfully deleted"
-    redirect_to order_items_path
+    @order_item = OrderItem.find_by(product_id: params[:id])
+    @order_item.delete
   end
 
   private

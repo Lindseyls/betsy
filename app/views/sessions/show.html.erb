@@ -1,11 +1,17 @@
 <section>
-  <%= form_for @login_form do |f| %>
-  <%= f.label :name %>
-  <%= f.text_field :name %>
 
-  <%= f.label :email %>
-  <%= f.text_field :email %>
+  <%= render partial: "layouts/error_messages", locals: { model: @user } %>
 
-  <%= f.submit class: "button" %>
+  <div class="container">
+
+  <%= form_for @user, url: login_path do |u| %>
+  <%= f.label :username %>
+  <%= f.text_field :username %>
+
+  <%= f.submit "Login", class: "button" %>
   <% end %>
+
+  </div>
+
+
 </section>
