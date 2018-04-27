@@ -26,7 +26,6 @@ class Product < ApplicationRecord
     average = total/reviews.count
     return average
   end
-  
 
   def self.by_pet_type
     # {"cat"=>[product1]}
