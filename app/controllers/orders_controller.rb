@@ -8,26 +8,27 @@ class OrdersController < ApplicationController
 
   def new
     @order = Order.new
+    session[:order_id] = @order.id
   end
 
 
-  # def make_cart
-  #   # TODO: adjust quantity to take user input (form?)
-  #   if current_user
-  #     @order = Order.find_by(user_id: current_user.id, status: 'pending')
-  #     OrderItem.new(product_id: params[:product_id], order_id: @order.id, quantity: 1)
-  #
-  #     redirect_to order_path(@order.id)
-  #   else
-  #     new_order = Order.create()
-  #
-  #     product = OrderItem.new(product_id: params[:product_id], order_id: new_order.id, quantity: 1)
-  #
-  #     product.save
-  #
-  #     redirect_to order_path(new_order.id)
-  #   end
-  # end
+  def make_cart
+    # TODO: adjust quantity to take user input (form?)
+    if current_user
+      @order = Order.find_by(user_id: current_user.id, status: 'pending')
+      OrderItem.new(product_id: params[:product_id], order_id: @order.id, quantity: 1)
+
+      redirect_to order_path(@order.id)
+    else
+      new_order = Order.create()
+
+      product = OrderItem.new(product_id: params[:product_id], order_id: new_order.id, quantity: 1)
+
+      product.save
+
+      redirect_to order_path(new_order.id)
+    end
+  end
 
 
   def show
@@ -35,7 +36,7 @@ class OrdersController < ApplicationController
   end
 
   def update
-    # @order.assign_attributes(order_params)
+    @order.assign_attributes(order_params)
     if params[:order][:cc_name] == " "
       flash[:failure] = 'Please enter the required information to complete your order.'
       redirect_to new_order_path
@@ -63,7 +64,11 @@ class OrdersController < ApplicationController
   end
 
   def edit
-    @order = Order.find_by(id: params[:id])
+    if params[:id]
+      @order = Order.find_by(id: params[:id])
+    else
+      @order.Order.new
+    end
   end
 
   def destroy
