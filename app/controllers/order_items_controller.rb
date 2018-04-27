@@ -33,6 +33,9 @@ class OrderItemsController < ApplicationController
 
   def update
     @order_item = OrderItem.find_by(id: params[:id])
+    @order_item.assign_attributes(order_item_params)
+    @order_item.save
+    redirect_to order_items_path
 
     @order_item.assign_attributes(order_item_params)
     @order_item.save
@@ -46,9 +49,6 @@ class OrderItemsController < ApplicationController
   def destroy
     @order_item = OrderItem.find_by(product_id: params[:id])
     @order_item.delete
-    flash[:status] = :success
-    flash[:result_text] = "Successfully deleted"
-    redirect_to order_items_path
   end
 
   private

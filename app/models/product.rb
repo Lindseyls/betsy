@@ -27,7 +27,20 @@ class Product < ApplicationRecord
     return average
   end
 
-  def no_of_stars
+  def find_largest(array, length)
+  i = 0
+  largest_value = array[0]
+  while i < length
+    if array[i] > largest_value
+      largest_value = array[i]
+    end
+    i += 1
+  end
+  return largest_value
+end
+
+
+  def top_average_rated_product
     self.show_rating
   end
 

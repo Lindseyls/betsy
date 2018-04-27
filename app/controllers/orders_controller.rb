@@ -8,6 +8,7 @@ class OrdersController < ApplicationController
 
   def new
     @order = Order.new
+    session[:order_id] = @order.id
   end
 
 
@@ -35,35 +36,28 @@ class OrdersController < ApplicationController
   end
 
   def update
-    # @order.assign_attributes(order_params)
-    if params[:order][:cc_name] == " "
-      flash[:failure] = 'Please enter the required information to complete your order.'
-      redirect_to new_order_path
-    else
-      @order = Order.new(
-        status: 'pending',
-        cc_name: params[:order][:cc_name],
-        email: params[:order][:email],
-        mail_adr: params[:order][:mail_adr],
-        cc_num: params[:order][:cc_num],
-        cc_exp: params[:order][:cc_exp],
-        cc_cvv: params[:order][:cc_cvv],
-        bill_zip: params[:order][:bill_zip],
-      )
-      result = @order.save
 
-      if result
-        flash[:success] = 'Your order has been placed'
-        redirect_to order_path
-      else
-        flash[:failure] = 'Something went wrong. Please place your order again'
-        redirect_to order_path
-      end
+    @order = Order.find_by(id: params[:id])
+    @order.assign_attributes(order_params)
+
+    result = @order.update(order_params)
+
+    if result
+      flash[:success] = 'Your order has been placed'
+      redirect_to order_path
+    else
+      flash[:failure] = 'Something went wrong. Please place your order again'
+      redirect_to order_path
     end
+
   end
 
   def edit
-    @order = Order.find_by(id: params[:id])
+    if params[:id]
+      @order = Order.find_by(id: params[:id])
+    else
+      @order.Order.new
+    end
   end
 
   def destroy
