@@ -80,7 +80,7 @@ class OrderItemsController < ApplicationController
   def destroy
     @order_item = OrderItem.find_by(id: params[:id])
     @order_item.destroy
-    add_inventory(@order_item)
+    # add_inventory(@order_item)
     flash[:status] = :success
     flash[:result_text] = "Successfully deleted"
     redirect_to order_items_path
@@ -100,7 +100,7 @@ class OrderItemsController < ApplicationController
   end
 
   def add_inventory(order_item)
-    @order.last.order_items.each do |op|
+      @order.last.order_items.each do |op|
       @product = Product.find_by(id: op.product_id)
       @product.stock += op.quantity
       @product.save
