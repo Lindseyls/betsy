@@ -3,12 +3,27 @@
   <p>
     <ul class="merchants">
       <% @users.each do |user| %>
+      <%= link_to(user.username, user_path(user.id), alt: 'link to') %>
       <li>
-        <%= @products %>
-        <%= link_to(user.username, user_path(user.id), alt: 'link to') %>
+        <% user.products.each do |product| %>
+        <ul>
+          <li>
+            <%=image_tag product.photo_url unless product.photo_url.blank?%>
+          </li>
+          <li>
+            <%= link_to product.name, product_path(product) %>
+          </li>
+          <li>
+            <%= format_price(product.price) %>
+          </li>
+          <li>
+            <%= product.description %>
+          </li>
+        </ul>
         <% end %>
       </li>
-    </ul>
-  </p>
+    <% end %>
+  </ul>
+</p>
 
 </section>

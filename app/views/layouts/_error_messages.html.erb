@@ -1,0 +1,16 @@
+
+<% if model.errors.messages.any? %>
+  <section class="callout secondary">
+    <h3>A problem occurred: Could not create album</h3>
+    <ul>
+      <% model.errors.messages.each do |field, problems| %>
+        <% problems.each do |problem| %>
+          <li>
+            <%= field %>
+            <%= problem %>
+          </li>
+        <% end %>
+      <% end %>
+    </ul>
+  </section>
+<% end %>

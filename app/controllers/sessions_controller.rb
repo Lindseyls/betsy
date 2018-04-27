@@ -1,4 +1,6 @@
 class SessionsController < ApplicationController
+
+
   def create
     auth_hash = request.env['omniauth.auth']
 
@@ -54,12 +56,13 @@ class SessionsController < ApplicationController
   #   redirect_to root_path
   # end
   #
-  # def logout
-  #   session[:user_id] = nil
-  #   flash[:status] = :success
-  #   flash[:result_text] = "Successfully logged out"
-  #   redirect_to root_path
-  # end
+
+  def logout
+    session[:user_id] = nil
+    flash[:status] = :success
+    flash[:result_text] = "Successfully logged out"
+    redirect_to root_path
+  end
 
   def index
     @user = User.find(session[:user_id])
