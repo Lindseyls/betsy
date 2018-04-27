@@ -13,7 +13,7 @@ class ProductsController < ApplicationController
   end
 
   def new
-    if !current_user
+    if current_user
       @product = Product.new(user_id: params[:user_id])
     else
       flash[:result_text] = "You need to be logged in to add a product"
@@ -22,7 +22,7 @@ class ProductsController < ApplicationController
   end
 
   def create
-    if !current_user
+    if current_user
       @product = Product.new(product_params)
 
       if @product.save
