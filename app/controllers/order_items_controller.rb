@@ -19,6 +19,7 @@ class OrderItemsController < ApplicationController
         return
       end
     end
+    <!--y aqui tambien -->
 
     # If we get here we're guaranteed to have an order
     @order_item = @order.order_items.new(order_item_params)
