@@ -11,7 +11,7 @@ class Order < ApplicationRecord
   validates :cc_name, presence: true
   validates :cc_num, presence: true, numericality: {only_integer: true}, length: {is: 16}, :if => :confirm_payment?
   validates :cc_exp, presence: true
-  # validate :checks_expiration_date
+  validate :checks_expiration_date
   validates :cc_cvv, presence: true, numericality: {only_integer: true}, length: {is: 3}, :if => :confirm_payment?
   validates :bill_zip, presence: true, numericality: {only_integer: true}, :if => :confirm_payment?
 
