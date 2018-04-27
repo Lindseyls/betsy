@@ -26,28 +26,7 @@ class Product < ApplicationRecord
     average = total/reviews.count
     return average
   end
-
-  def find_largest(array, length)
-  i = 0
-  largest_value = array[0]
-  while i < length
-    if array[i] > largest_value
-      largest_value = array[i]
-    end
-    i += 1
-  end
-  return largest_value
-end
-
-
-  def top_average_rated_product
-    if self.show_rating.nil?
-      return self.first
-    else
-      return self.show_rating.first
-    end
-  end
-
+  
 
   def self.by_pet_type
     # {"cat"=>[product1]}
