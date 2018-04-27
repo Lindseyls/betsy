@@ -23,7 +23,7 @@ class OrderItemsController < ApplicationController
     else
       puts "Found order number #{@order.id}"
     end
-
+    
     # If we get here we're guaranteed to have an order
     add_products_to_cart(@order)
 
