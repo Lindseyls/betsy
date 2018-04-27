@@ -49,23 +49,26 @@ class ProductsController < ApplicationController
       if @user.id != @product.user.id
         flash[:status] = :failure
         flash[:result_text] = "This isn't your product!"
-        redirect_to product_path(@product.id)
+        # redirect_to product_path(@product.id)
       end
     else
       flash[:status] = :failure
       flash[:result_text] = "You need to log in to edit!"
-      redirect_to product_path(@product.id)
+      # redirect_to product_path(@product.id)
     end
 
 
   end
 
   def update
-    if find_user && (@user.id != @product.user.id)
+    if find_product && (@user.id != @product.user.id)
       flash[:status] = :failure
       flash[:result_text] = "Oops..This isn't your product!"
       redirect_to product_path(@product.id)
     else
+      # @product = Product.find_by(product_id)
+
+      @product.update_attributes(product_params)
       if @product.save
         flash[:status] = :success
         flash[:result_text] = "Successfully updated #{@product.name}!"

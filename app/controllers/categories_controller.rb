@@ -10,6 +10,7 @@ class CategoriesController < ApplicationController
   def create
     @category = Category.new(category_params)
     @category.save
+    redirect_to users_path
   end
 
   private
