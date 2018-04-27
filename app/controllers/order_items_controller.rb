@@ -2,6 +2,7 @@ class OrderItemsController < ApplicationController
 
   def index
     @order_items = OrderItem.where(order_id: session[:order_id])
+    @order = Order.find_by(id: session[:order_id])
   end
 
   def new

@@ -1,7 +1,7 @@
 <section>
   <h3>Thanks for your order!</h3>
 
-  <p>Order Total:</p>
+  <p>Order Total: <%=format_price(@order.total_sum) %></p>
   <p>Order Status: <%= @order.status %></p>
   <div>
     <h4>Customer Information</h4>

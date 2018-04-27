@@ -28,6 +28,13 @@ end
     end
   end
 
-
+  def total_sum
+    total = 0
+    self.order_items.each do |item|
+      sub_total = item.sub_total
+      total += sub_total
+    end
+    return total
+  end
 
 end
