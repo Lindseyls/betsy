@@ -29,9 +29,9 @@ class OrderItemsController < ApplicationController
 
   end
 
-  def add_products_to_cart(@order)
-    @order_item = @order.order_items.new(order_item_params)
-    items_in_cart = @order.order_items
+  def add_products_to_cart(order)
+    @order_item = order.order_items.new(order_item_params)
+    items_in_cart = order.order_items
     if items_in_cart.include?(@order_item)
       @order_item.quantity += 1
       @order_item.save
@@ -54,9 +54,6 @@ class OrderItemsController < ApplicationController
     @order_item.save
     redirect_to order_items_path
 
-    @order_item.assign_attributes(order_item_params)
-    @order_item.save
-    redirect_to order_items_path
   end
 
   def edit
