@@ -41,7 +41,7 @@ class OrderItemsController < ApplicationController
       @order_item.quantity += 1
       @order_item.save
       flash[:success] = "Product added successfully"
-      # reduce_inventory(order_item)
+      reduce_inventory(@order_item)
       redirect_to order_items_path
     else
       if @order_item.save
@@ -58,7 +58,7 @@ class OrderItemsController < ApplicationController
     @order_item = OrderItem.find_by(id: params[:id])
     @order_item.assign_attributes(order_item_params)
     @order_item.save
-    # reduce_inventory(order_item)
+    reduce_inventory(@order_item)
     redirect_to order_items_path
 
   end
@@ -75,6 +75,7 @@ class OrderItemsController < ApplicationController
   def destroy
     @order_item = OrderItem.find_by(id: params[:id])
     @order_item.destroy
+    add_inventory(@order_item)
     flash[:status] = :success
     flash[:result_text] = "Successfully deleted"
     redirect_to order_items_path
@@ -85,19 +86,19 @@ class OrderItemsController < ApplicationController
     return params.require(:order_item).permit(:quantity, :product_id)
   end
 
-  # def reduce_inventory(order_item)
-  #   @product = Product.find_by(id: order_item.product_id)
-  #   @product.quantity -= order_item.quantity
-  #
-  #   @product.save
-  #
-  # end
-  #
-  # def add_inventory(order_item)
-  #   @order.first.order_items.each do |op|
-  #     @product = Product.find_by(id: op.product_id)
-  #     @product.quantity += op.quantity
-  #     @product.save
-  #   end
-  # end
+  def reduce_inventory(order_item)
+    @product = Product.find_by(id: @order_item.product_id)
+    @product.stock -= @order_item.quantity
+
+    @product.save
+
+  end
+
+  def add_inventory(order_item)
+    @order.last.order_items.each do |op|
+      @product = Product.find_by(id: op.product_id)
+      @product.stock += op.quantity
+      @product.save
+    end
+  end
 end
