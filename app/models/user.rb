@@ -15,8 +15,6 @@ class User < ApplicationRecord
       user = self.new(user_data)
       if user.save
         return user
-      else
-        raise
       end
 
   end
