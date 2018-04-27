@@ -9,6 +9,7 @@
   <%= stylesheet_link_tag    "application" %>
   <%= javascript_include_tag "application", 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 </head>
 
 <body>
@@ -52,10 +53,10 @@
 
   <div class=login>
     <% if @login_user %>
-      <%= link_to "Logged in as #{@login_user.username}", user_path(@login_user) %>
-      <%= link_to "Log Out", logout_path, method: :delete  %>
+    <%= link_to "Logged in as #{@login_user.username}", user_path(@login_user) %>
+    <%= link_to "Log Out", logout_path, method: :delete  %>
     <% else %>
-      <%= link_to "Login with Github", "/auth/github" %>
+    <%= link_to "Login with Github", "/auth/github" %>
     <% end %>
   </div>
 </div>
@@ -63,23 +64,69 @@
 </header>
 
 <% if flash[:result_text] or flash[:messages] %>
-  <section class="status <%= flash[:status] %>">
-    <h3><%= flash[:status] == :failure ? "A problem occurred: " : "" %><%= flash[:result_text] %></h3>
-    <% if flash[:messages] %>
-      <ul>
-        <% flash[:messages].each do |name, problems| %>
-          <% problems.each do |problem| %>
-            <li><%= name %>: <%= problem %></li>
-          <% end %>
-        <% end %>
-      </ul>
+<section class="status <%= flash[:status] %>">
+  <h3><%= flash[:status] == :failure ? "A problem occurred: " : "" %><%= flash[:result_text] %></h3>
+  <% if flash[:messages] %>
+  <ul>
+    <% flash[:messages].each do |name, problems| %>
+    <% problems.each do |problem| %>
+    <li><%= name %>: <%= problem %></li>
     <% end %>
-  </section>
+    <% end %>
+  </ul>
+  <% end %>
+</section>
 <% end %>
 
 <main>
   <%= yield %>
 </main>
+
+<section class="contact-footer-nav">
+  <div>
+    <h3>pEtsy LLC</h3>
+    <ul>
+      <li>
+        Founded in 2018
+      </li>
+      <li>
+        We care and love your pets
+      </li>
+    </ul>
+  </div>
+  <div>
+    <h3>Contact US</h3>
+    <ul>
+      <li>
+        pEtsyn@gmail.com
+      </li>
+      <li>
+        253-867-5309
+      </li>
+    </ul>
+  </div>
+  <div>
+    <h3>Social Media</h3>
+    <ul>
+      <li>
+        <a href="#" target="_blank"><i class="fa fa-github fa-2x"></i></a>
+      </li>
+      <li>
+        <a href="#" target="_blank"><i class="fa fa-linkedin fa-2x"></i></a>
+      </li>
+      <li>
+        <a href="#" target="_blank"><i class="fa fa-instagram fa-2x"></i></a>
+      </li>
+      <li>
+        <a href="#" target="_blank"><i class="fa fa-facebook-square fa-2x"></i></a>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<footer class="footer">
+  <h6>copyright &copy; 2018 pEtsy LLC. All Rights Reserved</h6>
+</footer>
 
 </body>
 

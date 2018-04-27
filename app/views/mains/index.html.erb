@@ -7,9 +7,11 @@
   <hr>
   <div class = "pet-type">
     <section >
-      <h3 class="pet-name">Cats</h3>
-      <div>
-        <%= image_tag "cat.jpg", width:"200", height:"400", class:"pictures"%>
+      <div class="main">
+        <p class="main-images">
+          <%= image_tag "cat.jpg", class:"pictures"%>
+        </p>
+        <h3 class="center-image-title">Cats</h3>
       </div>
 
       <ul>
@@ -17,26 +19,7 @@
         <li class="list">
           <h5>
             <%= link_to product.name, product_path(product) %>
-            <%=image_tag(product.photo_url) unless product.photo_url.blank?%>
-            <small><%= format_price(product.price) %></small>
-          </h5>
-        </li>
-        <% end %>
-      </ul>
-    </section>
-
-    <section>
-      <h3 class="pet-name">Dogs</h3>
-      <div>
-        <%= image_tag "dog_home.jpg", width:"200", height:"400", class:"pictures"%>
-      </div>
-
-      <ul>
-        <% @dog_products.each do |product| %>
-        <li class="list">
-          <h5>
-            <%= link_to product.name, product_path(product) %>
-            <%=image_tag(product.photo_url)%>
+            <%= link_to( image_tag(product.photo_url),  product_path(product)) unless product.photo_url.blank? %>
             <%= format_price(product.price) %>
           </h5>
         </li>
@@ -45,17 +28,41 @@
     </section>
 
     <section>
-      <h3 class="pet-name">Reptiles</h3>
-      <div>
-        <%= image_tag "reptile_home.jpg", width:"200", height:"400", class:"pictures"%>
+      <div class="main">
+        <p class="main-images">
+          <%= image_tag "dog_home.jpg", class:"pictures"%>
+        </p>
+        <h3 class="center-image-title">Dogs</h3>
       </div>
+
+      <ul>
+        <% @dog_products.each do |product| %>
+        <li class="list">
+          <h5>
+            <%= link_to product.name, product_path(product) %>
+            <%= link_to( image_tag(product.photo_url),  product_path(product)) unless product.photo_url.blank? %>
+            <%= format_price(product.price) %>
+          </h5>
+        </li>
+        <% end %>
+      </ul>
+    </section>
+
+    <section>
+      <div class="main">
+        <p class="main-images">
+          <%= image_tag "reptile_home.jpg", class:"pictures"%>
+        </p>
+        <h3 class="center-image-title">Reptile</h3>
+      </div>
+
       <ul>
         <% @reptile_products.each do |product| %>
         <li class="list">
           <h5>
             <%= link_to product.name, product_path(product) %>
-            <%=image_tag(product.photo_url) unless product.photo_url.blank?%>
-            <small><%= format_price(product.price) %></small>
+            <%= link_to( image_tag(product.photo_url),  product_path(product)) unless product.photo_url.blank? %>
+            <%= format_price(product.price) %>
           </h5>
         </li>
         <% end %>
