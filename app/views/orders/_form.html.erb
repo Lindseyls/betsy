@@ -21,6 +21,8 @@
     <%= f.label :bill_zip, "BILLING ZIP CODE" %>
     <%= f.text_area :bill_zip %>
 
+    <%= f.hidden_field :status, value: "paid" %>
+
     <%= f.submit "Proceed to checkout" , class:"button"%>
   <% end %>
 </section>
