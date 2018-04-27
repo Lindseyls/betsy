@@ -42,6 +42,7 @@ class OrdersController < ApplicationController
 
     if @order.save
       @order.status = "paid"
+      session[:order_id] = nil 
 
       # if @order.save
       flash[:success] = 'Your order has been placed'

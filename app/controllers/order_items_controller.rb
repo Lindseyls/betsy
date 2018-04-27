@@ -1,7 +1,7 @@
 class OrderItemsController < ApplicationController
 
   def index
-    @order_items = OrderItem.all
+    @order_items = OrderItem.where(order_id: session[:order_id])
   end
 
   def new
@@ -11,6 +11,7 @@ class OrderItemsController < ApplicationController
   def create
     # Step 1: Find or create an order
     @order = Order.find_by(id: session[:order_id])
+  
     unless @order
       @order = Order.new()
       unless @order.save
