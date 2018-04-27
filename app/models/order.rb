@@ -7,13 +7,13 @@ class Order < ApplicationRecord
 
   validates :status, presence: true, inclusion: { in: STATUS }
   validates :email, presence: true
-  validates :mail_adr, presence: true
-  validates :cc_name, presence: true
-  validates :cc_num, presence: true, numericality: {only_integer: true}, length: {is: 16}, :if => :confirm_payment?
-  validates :cc_exp, presence: true
-  validate :checks_expiration_date
-  validates :cc_cvv, presence: true, numericality: {only_integer: true}, length: {is: 3}, :if => :confirm_payment?
-  validates :bill_zip, presence: true, numericality: {only_integer: true}, :if => :confirm_payment?
+  # validates :mail_adr, presence: true
+  # validates :cc_name, presence: true
+  # validates :cc_num, presence: true, numericality: {only_integer: true}, length: {is: 16}, :if => :confirm_payment?
+  # validates :cc_exp, presence: true
+  # validate :checks_expiration_date
+  # validates :cc_cvv, presence: true, numericality: {only_integer: true}, length: {is: 3}, :if => :confirm_payment?
+  # validates :bill_zip, presence: true, numericality: {only_integer: true}, :if => :confirm_payment?
 
 
   def confirm_payment?
@@ -26,6 +26,23 @@ class Order < ApplicationRecord
         errors.add(:cc_exp, "invalid expiration date")
       end
     end
+  end
+
+  def sub_total
+    price = self.product.price
+    quantity = self.quantity
+    sub_total = price * quantity
+
+    return sub_total
+  end
+
+  def total_order
+    total = 0
+    items = self.order_items.where(order_id: self)
+    items.each do |item|
+      total += item.sub_total
+    end
+    return total
   end
 
 
