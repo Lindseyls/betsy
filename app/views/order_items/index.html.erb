@@ -1,6 +1,6 @@
 <section class="thumbnails">
  <h4>Your Shopping Cart</h4>
-
+<% if @order_items && @order_items.last %>
  <table>
    <thead>
      <tr>
@@ -32,5 +32,9 @@
    </tbody>
  </table>
  <%= link_to "Place my order", edit_order_path(@order_items.last.order_id), class:"button" %>
+ <%= link_to "Clear cart", clearcart_path, class: "button" %>
 
+<% else %>
+<h3> Empty cart! <h3>
+  <%end%>
 </section>

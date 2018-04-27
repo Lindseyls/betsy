@@ -5,20 +5,20 @@ class Order < ApplicationRecord
   has_many :order_items, dependent: :destroy
 
 
-  validates :status, presence: true, inclusion: { in: STATUS }
-  validates :email, presence: true
-  validates :mail_adr, presence: true
-  validates :cc_name, presence: true
-  validates :cc_num, presence: true, numericality: {only_integer: true}, length: {is: 16}, :if => :confirm_payment?
-  validates :cc_exp, presence: true
-  validate :checks_expiration_date
-  validates :cc_cvv, presence: true, numericality: {only_integer: true}, length: {is: 3}, :if => :confirm_payment?
-  validates :bill_zip, presence: true, numericality: {only_integer: true}, :if => :confirm_payment?
+with_options if: :checking_out? do |order|
+ order.validates :status, presence: true, inclusion: { in: STATUS }
+ order.validates :email, presence: true
+ order.validates :mail_adr, presence: true
+ order.validates :cc_name, presence: true
+ order.validates :cc_num, presence: true, numericality: {only_integer: true}, length: {is: 16}
+ order.validates :cc_exp, presence: true
+ order.validates :cc_cvv, presence: true, numericality: {only_integer: true}, length: {is: 3}
+ order.validates :bill_zip, presence: true, numericality: {only_integer: true}
+end
 
-
-  def confirm_payment?
-    self.status == "paid"
-  end
+ def checking_out?
+   self.status != "pending"
+ end
 
   def checks_expiration_date
     if !(cc_exp.nil? || cc_exp.empty?)
