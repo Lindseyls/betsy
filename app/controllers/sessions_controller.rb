@@ -1,5 +1,9 @@
 class SessionsController < ApplicationController
 
+  def index
+    @user = User.find(session[:user_id])
+  end
+
 
   def create
     auth_hash = request.env['omniauth.auth']
@@ -37,10 +41,6 @@ class SessionsController < ApplicationController
     end
   end
 
-  def index
-    @user = User.find(session[:user_id])
-  end
-
 
   def destroy
     session[:user_id] = nil
@@ -48,6 +48,5 @@ class SessionsController < ApplicationController
 
     redirect_to root_path
   end
-
 
 end
