@@ -1,17 +1,35 @@
 <section>
   <h3>Categories</h3>
+  <div>
+    <% @categories.each do |category| %>
+
+      <h7><%= category.name%></h7>
+
+    <% end %>
+  </div>
+
   <ul>
-    <% @categories.each do |category, products| %>
+    <% @categories.each do |category| %>
+
+    <h4><%= category.name%></h4>
+
     <li>
-      <h4><%= category.name%></h4>
+      <% category.products.each do |product| %>
       <ul>
-        <% products.each do |product| %>
-        <%= product.product.name %>
-        <%= product.price %>
-        <%= product.description %>
-        <%= product.stock %>
-        <% end %>
+        <li>
+          <%=image_tag product.photo_url unless product.photo_url.blank?%>
+        </li>
+        <li>
+          <%= link_to product.name, product_path(product) %>
+        </li>
+        <li>
+          <%= format_price(product.price) %>
+        </li>
+        <li>
+          <%= product.description %>
+        </li>
       </ul>
+      <% end %>
     </li>
     <% end %>
   </ul>

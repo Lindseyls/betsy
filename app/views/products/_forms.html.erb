@@ -20,7 +20,7 @@
 
   <div>
     <%= f.label :categories %>
-    <%= collection_check_boxes(:category, :category_ids, Category.all, :id, :name) %>
+    <%= collection_check_boxes(:product, :category_ids, Category.all, :id, :name) %>
   </div>
 
 
