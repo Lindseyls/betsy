@@ -32,6 +32,7 @@ class OrderItemsController < ApplicationController
   def add_products_to_cart(order)
     @order_item = order.order_items.new(order_item_params)
     items_in_cart = order.order_items
+    
     if items_in_cart.include?(@order_item)
       @order_item.quantity += 1
       @order_item.save
