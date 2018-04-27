@@ -27,16 +27,6 @@ class Product < ApplicationRecord
     return average
   end
 
-
-  def top_average_rated_product
-    if self.show_rating.nil?
-      return self.first
-    else
-      return self.show_rating.first
-    end
-  end
-
-
   def self.by_pet_type
     # {"cat"=>[product1]}
     products_by_pets = {}
