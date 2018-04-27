@@ -1,9 +1,2 @@
-<!-- TODO:create a form for new category and figure out how it links  -->
-<section>
-  <%= form_for @product do |f| %>
-    <%= f.label :name %>
-    <%= f.text_field :name %>
-    <%= f.submit class: "button" %>
-  <% end %>
 
-</section>
+<%= render partial: "form", locals: { model: @category, page_title: "Create a category" } %>

@@ -22,20 +22,18 @@ class ProductsController < ApplicationController
   end
 
   def create
-    if current_user
-      @product = Product.new(product_params)
+    @product = Product.new(product_params)
 
-      if @product.save
-        flash[:success] = "Product added successfully"
-        redirect_to products_path
-      else
-        flash.now[:failure] = "Validations Failed"
-        render :new, status: :bad_request
-      end
+    @product.user_id = @login_user.id
+
+    if @product.save
+      flash[:status] = :success
+      flash[:result_text]= "Product added successfully"
+      redirect_to products_path
     else
       flash[:status] = :failure
       flash[:result_text] = "You are not allowed to create a product"
-      redirect_to products_path
+      render :new, status: :bad_request
     end
 
   end

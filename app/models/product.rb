@@ -41,7 +41,11 @@ end
 
 
   def top_average_rated_product
-    self.show_rating
+    if self.show_rating.nil?
+      return self.first
+    else
+      return self.show_rating.first
+    end
   end
 
 
