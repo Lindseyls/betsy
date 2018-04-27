@@ -53,7 +53,7 @@ class ProductsController < ApplicationController
     else
       flash[:status] = :failure
       flash[:result_text] = "You need to log in to edit!"
-      # redirect_to product_path(@product.id)
+      redirect_to user_path(@product.id)
     end
   end
 
