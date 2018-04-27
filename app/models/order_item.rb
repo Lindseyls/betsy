@@ -19,11 +19,7 @@ class OrderItem < ApplicationRecord
   #     errors.add(:stock, "is #{self.product.stock}")
   #   end
 
-  def find_name
-    # given order, with product_id
-    # compare that p_i with product_id in the products table (product_id)
-
-  end
+  
 
   def sub_total
     price = self.product.price
@@ -33,14 +29,6 @@ class OrderItem < ApplicationRecord
     return sub_total
   end
 
-  # def total_sum
-  #   total = 0
-  #   self.each do |item|
-  #     sub_total = item.sub_total
-  #     total =+ sub_total
-  #     return total
-  #   end
-  # end
 
 
 end
