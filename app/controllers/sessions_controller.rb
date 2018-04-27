@@ -12,8 +12,6 @@ class SessionsController < ApplicationController
 
       @user = User.find_by(uid: auth_hash[:uid], provider: 'github')
 
-      flash[:status] = :success
-      flash[:result_text] = "Successfully logged in as existing user #{@user.username}"
 
       if @user.nil?
         @user = User.info_from_github(auth_hash)
@@ -21,8 +19,11 @@ class SessionsController < ApplicationController
 
         flash[:status] = :success
         flash[:result_text] = "Successfully created new user #{@user.username} with ID #{@user.id}"
+        return
       end
 
+      flash[:status] = :success
+      flash[:result_text] = "Successfully logged in as existing user #{@user.username}"
       session[:user_id] = @user.id
     else
       flash[:status] = :failure

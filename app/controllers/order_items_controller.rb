@@ -1,7 +1,7 @@
 class OrderItemsController < ApplicationController
 
   def index
-    @order_items = OrderItem.all
+    @order_items = OrderItem.where(order_id: session[:order_id])
   end
 
   def new
@@ -11,10 +11,13 @@ class OrderItemsController < ApplicationController
   def create
     # Step 1: Find or create an order
     @order = Order.find_by(id: session[:order_id])
+
     unless @order
       @order = Order.new()
       unless @order.save
-        flash.now[:failure] = "Didn't add to the cart: #{@order.errors.messages}"
+        flash[:status] = :failure
+        flash[:result_text] = "Didn't add to the cart"
+        flash[:messages] = @order.errors.messages
         redirect_back fallback_location: root_path
         return
       end
@@ -32,11 +35,12 @@ class OrderItemsController < ApplicationController
   def add_products_to_cart(order)
     @order_item = order.order_items.new(order_item_params)
     items_in_cart = order.order_items
-    
+
     if items_in_cart.include?(@order_item)
       @order_item.quantity += 1
       @order_item.save
       flash[:success] = "Product added successfully"
+      # reduce_inventory(order_item)
       redirect_to order_items_path
     else
       if @order_item.save
@@ -53,21 +57,46 @@ class OrderItemsController < ApplicationController
     @order_item = OrderItem.find_by(id: params[:id])
     @order_item.assign_attributes(order_item_params)
     @order_item.save
+    # reduce_inventory(order_item)
     redirect_to order_items_path
 
   end
 
-  def edit
-    @order_item = OrderItem.find_by(id: params[:id])
+  def clear_cart
+    add_inventory(@order_item)
+    OrderItem.where(order_id: @order.first.id).delete_all
+    redirect_to order_items_path
+  end
+
+  def show
   end
 
   def destroy
-    @order_item = OrderItem.find_by(product_id: params[:id])
-    @order_item.delete
+    @order_item = OrderItem.find_by(id: params[:id])
+    @order_item.destroy
+    flash[:status] = :success
+    flash[:result_text] = "Successfully deleted"
+    redirect_to order_items_path
   end
 
   private
   def order_item_params
     return params.require(:order_item).permit(:quantity, :product_id)
   end
+
+  # def reduce_inventory(order_item)
+  #   @product = Product.find_by(id: order_item.product_id)
+  #   @product.quantity -= order_item.quantity
+  #
+  #   @product.save
+  #
+  # end
+  #
+  # def add_inventory(order_item)
+  #   @order.first.order_items.each do |op|
+  #     @product = Product.find_by(id: op.product_id)
+  #     @product.quantity += op.quantity
+  #     @product.save
+  #   end
+  # end
 end
