@@ -25,7 +25,7 @@
         <td><%= format_price(product.price) %></td>
         <td><%= image_tag(product.photo_url, width:"60", height:"50")%></td>
         <td><%= product.pet_type%></td>
-        <td><%= link_to "Edit", edit_product_path(product.id), method: :put %></td>
+        <td><%= link_to "Edit", edit_product_path(product.id) %></td>
 
       </tr>
     <% end %>

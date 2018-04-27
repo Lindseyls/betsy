@@ -4,7 +4,7 @@
 </h4>
 
 <section>
-  <%= form_for @product do |f| %>
+  <%= form_for @product, :method => :put do |f| %>
   <%= f.label :name %>
   <%= f.text_field :name %>
 
