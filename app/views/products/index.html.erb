@@ -1,15 +1,17 @@
-
-<div class="top-margin">
+<div>
   <h3>New Collection of Products</h3>
-  <%= link_to root_path do %>
-   <%= image_tag "cat.jpg", width:"200", height:"400", class: "pictures" %>
-   <%= image_tag "dog_home.jpg", width:"200", height:"400", class:"pictures"%>
-   <%= image_tag "reptile_home.jpg", width:"200", height:"400", class:"pictures"%>
-<% end %>
+  <%= link_to root_path %>
+  <ul id="image-container" class="image">
+    <li><%= image_tag "cat.jpg", width:"200", height:"400", class: "pictures" %></li>
+    <li><%= image_tag "dog_home.jpg", width:"200", height:"400", class:"pictures"%></li>
+    <li><%= image_tag "reptile_home.jpg", width:"200", height:"400", class:"pictures"%></li>
+  </ul>
+</div>
 
-  <% Product.by_pet_type.each do |pet_type, products| %>
-  <h4><strong> <%= pet_type %> </strong></h4>
+<% Product.by_pet_type.each do |pet_type, products| %>
+<h4><strong> <%= pet_type.capitalize %> </strong></h4>
 
+<div class="product-container">
   <% products.each do |product| %>
   <div class="thumbnail">
     <div class="container-products">
@@ -21,15 +23,15 @@
       <span class="glyphicon glyphicon-star"></span>
 
       <p> Rating:
-      <% if product.reviews.count == 0 %>
-          No reviews
-      <% else %>
-          <%= render_stars(product.show_rating) %>
-      <% end %>
+        <% if product.reviews.count == 0 %>
+        No reviews
+        <% else %>
+        <%= render_stars(product.show_rating) %>
+        <% end %>
       </p>
-
     </div>
   </div>
+</div>
 </div>
 
 
