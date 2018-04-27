@@ -34,23 +34,28 @@ class OrderItemsController < ApplicationController
   end
 
   def add_products_to_cart(order)
-    @order_item = order.order_items.new(order_item_params)
-    items_in_cart = order.order_items
+    # Step 0: Get all the required info
+    product_id = order_item_params[:product_id]
+    quantity = order_item_params[:quantity]
 
-    if items_in_cart.include?(@order_item)
-      @order_item.quantity += 1
-      @order_item.save
-      flash[:success] = "Product added successfully"
+    # Step 1: get an order item
+    # either pull an existing one for this product from the cart
+    # or, create a new one
+    @order_item = order.order_items.find_by(product_id: product_id)
+    if @order_item
+      @order_item.quantity += quantity.to_i
+    else
+      @order_item = order.order_items.new(order_item_params)
+    end
+
+    # Step 2: save, report the result
+    if @order_item.save
       reduce_inventory(@order_item)
+      flash[:success] = "Product added successfully"
       redirect_to order_items_path
     else
-      if @order_item.save
-        flash[:success] = "Product added successfully"
-        redirect_to order_items_path
-      else
-        flash[:failure] = "Didn't add to the cart"
-        redirect_to product_path(@order_item.product_id), status: :bad_request
-      end
+      flash[:failure] = "Didn't add to the cart"
+      redirect_to product_path(@order_item.product_id), status: :bad_request
     end
   end
 
