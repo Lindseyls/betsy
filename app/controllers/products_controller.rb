@@ -68,6 +68,9 @@ class ProductsController < ApplicationController
       flash[:result_text] = "Oops..This isn't your product!"
       redirect_to product_path(@product.id)
     else
+      @product = Product.find_by(product_id)
+
+      @product.update_attributes(product_params)
       if @product.save
         flash[:status] = :success
         flash[:result_text] = "Successfully updated #{@product.name}!"
