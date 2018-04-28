@@ -24,10 +24,6 @@ Rails.application.routes.draw do
   end
 
 
-  get '/make_cart', to: 'orders#make_cart', as: 'cart'
-
-  get 'order_items/clearcart', to: 'order_items#clear_cart', as: 'clearcart'
-
   get "/auth/:provider/callback", to: "sessions#create", as: "auth_callback"
 
 end
