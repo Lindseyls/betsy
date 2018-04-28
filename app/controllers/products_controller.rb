@@ -41,7 +41,7 @@ class ProductsController < ApplicationController
       flash[:status] = :failure
       flash[:result_text] = "Oops..You can't create a product"
       redirect_to products_path
-      
+
     end
   end
 
@@ -53,7 +53,7 @@ class ProductsController < ApplicationController
 
   def edit
     if current_user
-      if @user.id != @product.user.id
+      if session[:user_id] != @product.user.id
         flash[:status] = :failure
         flash[:result_text] = "This isn't your product!"
         redirect_to product_path(@product.id)
