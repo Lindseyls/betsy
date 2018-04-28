@@ -2,12 +2,21 @@ class ReviewsController < ApplicationController
 
   def new
     @product = Product.find_by(id: params[:product_id])
-    @review = Review.new(product: @product)
+    if current_user && session[:user_id] == @product.user.id
+      flash[:status] = :failure
+      flash[:result_text] = "Oops..You can't review your own product!"
+      redirect_to product_path(@product.id)
+    else
+      render_404 unless @product
+      @review = Review.new
+    end
   end
+
+
 
   def create
     @product = Product.find_by(id: params[:product_id])
-    @user = User.find_by(id: params[:id])
+
     if current_user && session[:user_id] == @product.user.id
       flash[:status] = :failure
       flash[:result_text] = "You can't review your own product"
@@ -31,7 +40,7 @@ class ReviewsController < ApplicationController
 
   private
   def review_params
-    params.require(:review).permit(:rating, :comments)
+    params.require(:review).permit(:rating, :comments, :product_id)
   end
 
 end
