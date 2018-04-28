@@ -7,7 +7,8 @@ class ReviewsController < ApplicationController
 
   def create
     @product = Product.find_by(id: params[:product_id])
-    if current_user && @user.id == @product.user.id
+    @user = User.find_by(id: params[:id])
+    if current_user && session[:user_id] == @product.user.id
       flash[:status] = :failure
       flash[:result_text] = "You can't review your own product"
       redirect_to product_path(@product.id)
