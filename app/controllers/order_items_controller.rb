@@ -68,11 +68,6 @@ class OrderItemsController < ApplicationController
 
   end
 
-  def clear_cart
-    add_inventory(@order_item)
-    OrderItem.where(order_id: @order.first.id).delete_all
-    redirect_to order_items_path
-  end
 
   def show
   end

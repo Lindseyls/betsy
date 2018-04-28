@@ -23,20 +23,26 @@ class ProductsController < ApplicationController
   end
 
   def create
-    @product = Product.new(product_params)
+    if current_user
+      @product = Product.new(product_params)
 
-    @product.user_id = @login_user.id
+      # @product.user_id = @login_user.id
 
-    if @product.save
-      flash[:status] = :success
-      flash[:result_text]= "Product added successfully"
-      redirect_to products_path
+      if @product.save
+        flash[:status] = :success
+        flash[:result_text]= "Product added successfully"
+        redirect_to products_path
+      else
+        flash[:status] = :failure
+        flash[:result_text] = "Could not create a product"
+        render :new, status: :bad_request
+      end
     else
       flash[:status] = :failure
-      flash[:result_text] = "You are not allowed to create a product"
-      render :new, status: :bad_request
+      flash[:result_text] = "Oops..You can't create a product"
+      redirect_to products_path
+      
     end
-
   end
 
   def show
@@ -47,13 +53,15 @@ class ProductsController < ApplicationController
 
   def edit
     if current_user
-      flash[:status] = :failure
-      flash[:result_text] = "This isn't your product!"
-      redirect_to product_path(@product.id)
+      if @user.id != @product.user.id
+        flash[:status] = :failure
+        flash[:result_text] = "This isn't your product!"
+        redirect_to product_path(@product.id)
+      end
     else
       flash[:status] = :failure
       flash[:result_text] = "You need to log in to edit!"
-      redirect_to user_path(@product.id)
+      redirect_to product_path(@product.id)
     end
   end
 
