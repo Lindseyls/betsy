@@ -69,13 +69,13 @@ describe User do
   describe 'custom methods' do
     it "builds user from auth_hash" do
       auth_hash = {
-        info: { username: "test username", email: "test@petsy.com" },
+        info: { nickname: "test", email: "test@petsy.com" },
         uid: "124",
         provider: "github"
       }
       user = User.info_from_github(auth_hash)
 
-      user.username.must_equal "test username"
+      user.username.must_equal "test"
       user.email.must_equal "test@petsy.com"
       user.uid.must_equal 124
       user.provider.must_equal "github"
