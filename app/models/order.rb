@@ -20,13 +20,6 @@ end
    self.status != "pending"
  end
 
-  def checks_expiration_date
-    if !(cc_exp.nil? || cc_exp.empty?)
-      if Date.strptime(cc_exp, '%m/%y') < Date.today
-        errors.add(:cc_exp, "invalid expiration date")
-      end
-    end
-  end
 
   def total_sum
     total = 0
@@ -35,6 +28,13 @@ end
       total += sub_total
     end
     return total
+  end
+
+  def reduce_inventory
+    self.order_items.each do |item|
+      item.product.stock_reduction(item.quantity)
+    end
+
   end
 
 end

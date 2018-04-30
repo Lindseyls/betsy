@@ -1,19 +1,34 @@
 class OrdersController < ApplicationController
-  # nic used
-  # route controller view
+  before_action :find_order, only: [:show, :edit, :update]
+  before_action :current_user
 
   def index
-    @orders = Order.all
+
+    if session[:user_id]
+      @user = User.find(session[:user_id])
+      if params[:user_id]
+        @orders = Order.all.where(id: params[:order_id])
+      else
+        @orders = Order.all
+      end
+
+
+    else
+      @orders = Order.all
+
+    end
   end
+
+
 
   def new
     @order = Order.new
-    session[:order_id] = @order.id
+    # session[:order_id] = @order.id
   end
 
 
   def show
-    @order = Order.find_by(id: params[:id])
+
   end
 
   def update
@@ -23,6 +38,7 @@ class OrdersController < ApplicationController
 
     if @order.save
       @order.status = "paid"
+      @order.reduce_inventory
       session[:order_id] = nil
 
       # if @order.save
@@ -33,7 +49,7 @@ class OrdersController < ApplicationController
       flash.now[:status] = :failure
       flash.now[:result_text] = "Please enter the Order details again"
       flash.now[:messages] = @order.errors.messages
-      render :edit
+      render :edit, status: :found
     end
   end
 
@@ -50,7 +66,13 @@ class OrdersController < ApplicationController
 
   private
   def order_params
-    params.require(:order).permit(:status, :email, :mail_adr, :cc_name,
-      :cc_num, :cc_exp, :cc_cvv, :bill_zip)
-    end
+    return params.require(:order).permit(:status, :email, :mail_adr, :cc_name, :cc_num, :cc_exp, :cc_cvv, :bill_zip)
   end
+
+  def find_order
+    @order = Order.find_by(id: params[:id])
+    render_404 unless @order
+  end
+
+
+end
