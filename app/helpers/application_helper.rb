@@ -9,7 +9,7 @@ module ApplicationHelper
       price = 0
     end
 
-    "$" + format("%.2f", price)
+    "$" + format("%.2f", price/100)
   end
 
   def render_stars(value)

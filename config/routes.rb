@@ -4,6 +4,8 @@ Rails.application.routes.draw do
 
   root 'mains#index'
 
+  get '/user/:id', to: 'sessions#index', as: 'user_profile'
+
   delete '/logout', to: 'sessions#logout', as: 'logout'
   resources :order_items
 
