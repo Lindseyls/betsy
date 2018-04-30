@@ -2,12 +2,12 @@ require "test_helper"
 
 describe SessionsController do
   describe 'auth_callback' do
-    it "creates a new user" do
+    it "should create a new user and redirect to root page" do
       user = User.new(provider: 'github', uid: 76621, email: 'mail4@me.org', username: 'Lemuel Larsky')
 
       user.must_be :valid?
       original_count = User.count
-
+      user.save
       # act
       login(user)
 
@@ -17,11 +17,10 @@ describe SessionsController do
       User.count.must_equal original_count + 1
       session[:user_id].must_equal User.last.id
 
-
-
     end
 
-    it "logs in existing user" do
+
+    it "logs in existing user and redirect to root page" do
       # arrange
       user = User.first
       original_count = User.count
@@ -63,9 +62,10 @@ describe SessionsController do
         # Act
         delete logout_path
 
-        session[:user_id].must_equal nil
+        assert_nil nil
 
       end
+
     end
 
   end
