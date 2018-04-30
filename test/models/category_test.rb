@@ -46,7 +46,5 @@ describe Category do
     end
   end
 
-  describe "show_products method" do
-
-  end
+  
 end

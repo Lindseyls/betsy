@@ -4,7 +4,14 @@ class CategoriesController < ApplicationController
   end
 
   def new
-    @category = Category.new
+    if current_user
+      @category = Category.new
+    else
+      flash[:status] = :failure
+      flash[:result_text] = "You need to be logged in to add a category"
+      redirect_to users_path
+    end
+    
   end
 
   def create

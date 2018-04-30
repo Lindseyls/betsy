@@ -1,6 +1,8 @@
 require "test_helper"
 
+
 describe CategoriesController do
+  let(:user) { users(:one) }
   describe 'index' do
     it 'sends a success response when there are many categories' do
       Category.count.must_be :>, 0
@@ -11,18 +13,38 @@ describe CategoriesController do
       # Assert
       must_respond_with :success
     end
+
   end
 
   describe 'new' do
-    it 'responds with success' do
+    it 'responds with success with a logged user' do
       # category = Category.first
+      login(user)
+
       get new_category_path
 
       must_respond_with :success
     end
+
+
   end
 
   describe "create" do
+    it "lets a logged user to create a category" do
+      category_data = {name: 'new category'}
+      user = User.first
+      old_category_count = Category.count
+
+      Category.new(category_data).must_be :valid?
+      login(user)
+
+      post categories_path, params: {category: category_data}
+
+      must_respond_with :redirect
+      must_redirect_to users_path
+      Category.count.must_equal old_category_count + 1
+    end
+
     it "can add a valid category" do
       # Arrange
       category_data = {
