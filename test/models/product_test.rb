@@ -124,12 +124,22 @@ describe Product do
     end
 
 
-    it "returns a list of products" do
-      product = products(:product1).pet_type
-      Product.pet_type(product).must_be_kind_of Array
+    it "returns a collection of products" do
+  
+      Product.by_pet_type.must_be_kind_of Hash
     end
 
+
+    it 'reduces the stock of the product' do
+      product = Product.first
+      product.stock = 10
+      product.save
+
+      product.stock_reduction(3)
+      product.reload
+
+      product.stock.must_equal 7
+    end
   end
 
-
-  end
+end

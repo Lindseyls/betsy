@@ -13,17 +13,18 @@ class ProductsController < ApplicationController
   end
 
   def new
-    if current_user
+    if session[:user_id]
       @product = Product.new(user_id: params[:user_id])
     else
       flash[:status] = :failure
       flash[:result_text] = "You need to be logged in to add a product"
-      redirect_to products_path
+      redirect_to users_path
+
     end
   end
 
   def create
-    if current_user
+    if session[:user_id]
       @product = Product.new(product_params)
 
       # @product.user_id = @login_user.id
@@ -40,7 +41,7 @@ class ProductsController < ApplicationController
     else
       flash[:status] = :failure
       flash[:result_text] = "Oops..You can't create a product"
-      redirect_to products_path
+      redirect_to users_path
 
     end
   end
@@ -52,7 +53,7 @@ class ProductsController < ApplicationController
   end
 
   def edit
-    if current_user
+    if session[:user_id ]
       if session[:user_id] != @product.user.id
         flash[:status] = :failure
         flash[:result_text] = "This isn't your product!"

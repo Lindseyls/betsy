@@ -21,11 +21,21 @@ describe ProductsController do
       # Assert
       must_respond_with :success
     end
+
   end
 
   describe "new" do
-    it "succeeds" do
+    it "does not succeed when guest user" do
       # Arrange & Act
+      get new_product_path
+      # Assert
+      must_redirect_to users_path
+    end
+
+    it "succeeds when login user" do
+      # Arrange & Act
+      existing_user = users(:one)
+      login(existing_user)
       get new_product_path
       # Assert
       must_respond_with :success
@@ -35,15 +45,16 @@ describe ProductsController do
   describe "create" do
     it 'can add a valid product' do
       # Arrange
+      existing_user = users(:one)
+      login(existing_user)
       product_data = {
-        id: Product.first.id,
         name: 'TestToy',
         stock: 5,
         price: 500,
         description: "A dogs dream",
         pet_type: "dog",
         photo_url: "Pickles.jpg",
-        # user_id: 5
+        user_id: existing_user.id,
       }
       old_product_count = Product.count
 
@@ -60,6 +71,32 @@ describe ProductsController do
       Product.count.must_equal old_product_count + 1
       Product.last.name.must_equal product_data[:name]
     end
+
+    it 'cannot add a product with bogus data' do
+      # Arrange
+      existing_user = users(:two)
+      login(existing_user)
+      product_data = {
+        stock: 5,
+        price: 500,
+        description: "A dogs dream",
+        pet_type: "dog",
+        photo_url: "Pickles.jpg",
+        user_id: existing_user.id,
+      }
+      old_product_count = Product.count
+
+      # Act
+      post products_path, params: { product: product_data }
+
+      # Assert
+      must_respond_with :bad_request
+
+      Product.count.must_equal old_product_count
+      # Product.last.name.must_equal product_data[:name]
+    end
+
+
   end
 
   describe "show" do
