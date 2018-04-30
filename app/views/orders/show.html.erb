@@ -32,6 +32,9 @@
       </tr>
     </table>
 
-    <%= link_to "Cancel", method: :put, class: "button" %>
+
+    <% unless @order.status == "canceled"%>
+    <%= link_to "Cancel", order_path(@order.id), method: :patch, class: "button" %>
+     <% end %>
   </div>
 </section>

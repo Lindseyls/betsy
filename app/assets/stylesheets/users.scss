@@ -2,13 +2,26 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 .merchants {
-  font-size: 40pt;
+  font-size: 30pt;
   padding-left: 10%;
   list-style-type: none;
+
 }
 
 .merchants .container li {
   list-style-type: none;
   font-size: 20px;
   text-align: center;
+}
+
+.small-container {
+  display: flex;
+  flex-direction:row;
+  justify-content:space-around;
+}
+
+.links {
+  display: flex;
+  flex-direction:row;
+  justify-content:flex-start;
 }
