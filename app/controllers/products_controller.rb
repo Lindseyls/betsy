@@ -1,6 +1,6 @@
 class ProductsController < ApplicationController
   before_action :find_product, only: [:show, :edit, :update, :destroy]
-
+  before_action :require_login, except: [:index, :show]
 
   def index
     if params[:user_id]
@@ -13,36 +13,22 @@ class ProductsController < ApplicationController
   end
 
   def new
-    if session[:user_id]
-      @product = Product.new(user_id: params[:user_id])
-    else
-      flash[:status] = :failure
-      flash[:result_text] = "You need to be logged in to add a product"
-      redirect_to users_path
-
-    end
+    @product = Product.new(user: @login_user)
   end
 
   def create
-    if session[:user_id]
-      @product = Product.new(product_params)
+    @product = @login_user.products.new(product_params)
 
-      # @product.user_id = @login_user.id
+    # @product.user_id = @login_user.id
 
-      if @product.save
-        flash[:status] = :success
-        flash[:result_text]= "Product added successfully"
-        redirect_to products_path
-      else
-        flash[:status] = :failure
-        flash[:result_text] = "Could not create a product"
-        render :new, status: :bad_request
-      end
+    if @product.save
+      flash[:status] = :success
+      flash[:result_text]= "Product added successfully"
+      redirect_to products_path
     else
       flash[:status] = :failure
-      flash[:result_text] = "Oops..You can't create a product"
-      redirect_to users_path
-
+      flash[:result_text] = "Could not create a product"
+      render :new, status: :bad_request
     end
   end
 
@@ -102,7 +88,7 @@ class ProductsController < ApplicationController
   private
 
   def product_params
-    params.require(:product).permit(:name, :stock, :price, :description, :pet_type, :photo_url, :user_id, category_ids: [])
+    params.require(:product).permit(:name, :stock, :price, :description, :pet_type, :photo_url, category_ids: [])
   end
 
   def find_product
